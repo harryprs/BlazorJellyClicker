@@ -1,4 +1,4 @@
-# BlazorJellyClicker
+# BlazorJellyClicker - Work-In-Progress
 ## About The Project
 A jelly themed idle clicker game developed in .NET Core 7 Blazor.
 
@@ -8,6 +8,12 @@ A jelly themed idle clicker game developed in .NET Core 7 Blazor.
 * Buy various jellies to gain passive income.
 * Buy various upgrades to boost stats of specific jellies, or global stats such as click power and overall income.
 * Save and load your progress from a database.
+
+### Additional Planned Features
+* Secure API endpoints using JWT-based Authentication.
+* Eye-catching styling.
+* Responsive styling to support smaller screen sizes.
+* Extra jellies, upgrade tiers and types of upgrades.
 
 ### Built With
 * .NET Core 7 API
