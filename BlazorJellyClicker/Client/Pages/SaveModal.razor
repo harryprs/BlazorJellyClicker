@@ -1,0 +1,114 @@
+﻿@using BlazorJellyClicker.Client.Data;
+@using BlazorJellyClicker.Shared.Models;
+@inject IJSRuntime JsRuntime
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Save Game</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="() => Close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @for (var i = 0; i < _states.Count; i++)
+                {
+                    var bindValue = i;
+                    <div class="state-container">
+                        <input type="text" placeholder=@_states[i].StateName @bind-value="_states[bindValue].StateName" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Save(_states[bindValue])">Save</button>
+                    </div>
+                }
+                @if(_states.Count < 10)
+                {
+                    <div class="div-center">
+                        <input type="text" @bind-value="_saveName" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => NewSave()">New Save</button>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+        [Parameter] public EventCallback<SaveCallbackArgs> OnDoneCallback { get; set; }
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    [Parameter]
+    public string _saveName { get; set; } = "";
+    public List<GameState> _states = new List<GameState>();
+
+    public void Open(List<GameState> states)
+    {
+        _states = states;
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+
+    public async void Save(GameState state)
+    {
+        if(!ValidateName(state.StateName))
+        {
+            return;
+        }
+        if (await SaveConfirm())
+        {
+            await InvokeAsync(() => OnDoneCallback.InvokeAsync(new SaveCallbackArgs() { StateId = state.Id, Name = state.StateName }));
+            Close();
+        }
+    }
+
+    public async void NewSave()
+    {
+        if(!ValidateName(_saveName))
+        {
+            return;
+        }
+
+        await InvokeAsync(() => OnDoneCallback.InvokeAsync(new SaveCallbackArgs() { StateId = -1, Name = _saveName }));
+        Close();
+    }
+
+    public async Task<bool> SaveConfirm()
+    {
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to overwrite this file?");
+        if(confirmed)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool ValidateName(string saveName)
+    {
+        if (saveName.Length < 2 || saveName.Length > 25)
+        {
+            JsRuntime.InvokeAsync<bool>("alert", $"Save names must be between 2 and 25 characters long.");
+            return false;
+        }
+        return true;
+    }
+}

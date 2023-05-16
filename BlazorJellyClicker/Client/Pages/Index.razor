@@ -1,0 +1,26 @@
+﻿@page "/"
+@inject ISyncLocalStorageService LocalStorage
+
+<PageTitle>Index</PageTitle>
+
+<div>
+	<p class="index-title">Jelly Clicker</p>
+	<div class="index-body">
+		<p>An idle clicker game with a simple goal, build your gelatinous empire.</p>
+		<p>Click on the jelly to harvest it!</p>
+		<p>Buy various different Jellies to gain passive income!</p>
+		<p>Buy upgrades to boost specific jellies, reduce cost, increase your clicking power or global income!</p>
+	</div>
+	<AuthorizeView>
+		<Authorized>
+			<div class="index-link">
+				<a href="jellyclickergame">Play Game!</a>
+			</div>
+		</Authorized>
+		<NotAuthorized>
+			<a class="index-link" href="register">Register</a>
+			<a class="index-link" href="login">Login</a>
+		</NotAuthorized>
+	</AuthorizeView>
+	<p>Built by Harry Parsons</p>
+</div>

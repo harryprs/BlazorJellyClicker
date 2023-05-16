@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Name": "Click Powerup I",
+    "Description": "Increase Click Power by 1!",
+    "BaseIncrease": 1,
+    "Cost": 50,
+    "Purchased": false,
+    "OrderInSeries": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Click Powerup II",
+    "Description": "Increase Click Power by 5!",
+    "BaseIncrease": 5,
+    "Cost": 500,
+    "Purchased": false,
+    "OrderInSeries": 2
+  }
+]

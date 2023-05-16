@@ -1,0 +1,11 @@
+[
+  {
+    "Id": 1,
+    "Name": "Income Multiplier I",
+    "Description": "Multiply ALL Income by 15%!",
+    "Multi": 0.15,
+    "Cost": 1000,
+    "Purchased": false,
+    "OrderInSeries": 1
+  }
+]

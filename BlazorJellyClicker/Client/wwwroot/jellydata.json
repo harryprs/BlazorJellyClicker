@@ -1,0 +1,185 @@
+[
+  {
+    "JellyId": 1,
+    "Name": "Jelly",
+    "BaseCost": 10.0,
+    "BaseIncome": 1.0,
+    "Description": "Just like Mother makes",
+    "BaseUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Base Upgrade I",
+        "Description": "Increase Base Income of each Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 1000,
+        "Purchased": false,
+        "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 5000,
+        "Purchased": false,
+        "OrderInSeries": 2
+      }
+    ],
+    "MultiUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Multi Upgrade I",
+        "Description": "Multiply the Income of each Jelly by 15%!",
+        "Multi": 0.15,
+        "Cost": 10000,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ]
+  },
+  {
+    "JellyId": 2,
+    "Name": "Large Jelly",
+    "BaseCost": 50.0,
+    "BaseIncome": 5.0,
+    "Description": "You but better",
+    "BaseUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Base Upgrade I",
+        "Description": "Increase Base Income of each Large Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 250,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ],
+    "MultiUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Multi Upgrade I",
+        "Description": "Multiply the Income of each Large Jelly by 15%!",
+        "Multi": 0.15,
+        "Cost": 10000,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ]
+  },
+  {
+    "JellyId": 3,
+    "Name": "Giga Jelly",
+    "BaseCost": 250.0,
+    "BaseIncome": 25.0,
+    "Description": "GigaChad",
+    "BaseUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Base Upgrade I",
+        "Description": "Increase Base Income of each Giga Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 2500,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ],
+    "MultiUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Multi Upgrade I",
+        "Description": "Multiply the Income of each Giga Jelly by 15%!",
+        "Multi": 0.15,
+        "Cost": 10000,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ]
+  },
+  {
+    "JellyId": 4,
+    "Name": "Jelemental",
+    "BaseCost": 1250.0,
+    "BaseIncome": 125.0,
+    "Description": "Conjured sweetener",
+    "BaseUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Base Upgrade I",
+        "Description": "Increase Base Income of each Jelemental by 1!",
+        "BaseIncrease": 1,
+        "Cost": 12500,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ],
+    "MultiUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Multi Upgrade I",
+        "Description": "Multiply the Income of each Jelemental by 15%!",
+        "Multi": 0.15,
+        "Cost": 10000,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ]
+  },
+  {
+    "JellyId": 5,
+    "Name": "Jellymancer",
+    "BaseCost": 6250.0,
+    "BaseIncome": 625.0,
+    "Description": "Just a fancy title for a pudding Chef really",
+    "BaseUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Base Upgrade I",
+        "Description": "Increase Base Income of each Jellymancer by 1!",
+        "BaseIncrease": 1,
+        "Cost": 62500,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ],
+    "MultiUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Multi Upgrade I",
+        "Description": "Multiply the Income of each Jellymancer by 15%!",
+        "Multi": 0.15,
+        "Cost": 10000,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ]
+  },
+  {
+    "JellyId": 6,
+    "Name": "Jelich",
+    "BaseCost": 31250.0,
+    "BaseIncome": 3125.0,
+    "Description": "Served in its own Phylactery",
+    "BaseUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Base Upgrade I",
+        "Description": "Increase Base Income of each Jelich by 1!",
+        "BaseIncrease": 1,
+        "Cost": 312500,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ],
+    "MultiUpgrades": [
+      {
+        "Id": 1,
+        "Name": "Multi Upgrade I",
+        "Description": "Multiply the Income of each Jelich by 15%!",
+        "Multi": 0.15,
+        "Cost": 10000,
+        "Purchased": false,
+        "OrderInSeries": 1
+      }
+    ]
+  }
+]

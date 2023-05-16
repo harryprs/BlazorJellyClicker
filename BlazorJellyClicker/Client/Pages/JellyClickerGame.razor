@@ -1,0 +1,438 @@
+﻿@page "/JellyClickerGame"
+@using BlazorJellyClicker.Client.Data;
+@using BlazorJellyClicker.Shared.Data;
+@using BlazorJellyClicker.Shared.Models;
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.Extensions.Configuration
+@using Blazored.LocalStorage;
+@using System.Text.Json;
+@inject IConfiguration Configuration
+@inject ISyncLocalStorageService LocalStorage
+@inject AuthenticationStateProvider AuthStateProvider
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime
+@attribute [Authorize]
+
+<h3>Jelly Clicker</h3>
+
+<div>
+	<BlazorJellyClicker.Client.Pages.LoadModal @ref="LoadModal" OnDoneCallback="LoadState"></BlazorJellyClicker.Client.Pages.LoadModal>
+	<BlazorJellyClicker.Client.Pages.SaveModal @ref="SaveModal" OnDoneCallback="SaveState"></BlazorJellyClicker.Client.Pages.SaveModal>
+	<button @onclick="() => OpenSaveModal()">Save Game</button>
+	<button @onclick="() => OpenLoadModal()">Load Game</button>
+</div>
+
+<div class="game-board">
+	<div class="game-board-column">
+		<div class="jelly-shop-container">
+			@foreach (var j in _jellies)
+			{
+				<div class="jelly-box" >
+					<div @onclick="@(() => BuyJelly(j.Cost, j.BaseIncome, j.Name, j.IncomeMulti))">
+						<div class="jelly-box-header">@j.Name: @j.Count</div>
+						<div class="jelly-box-content">Cost: @RoundUp(j.Cost)</div>
+						<div class="jelly-box-content">+@(j.BaseIncome * j.IncomeMulti * globalIncomeMulti)</div>
+						<div class="jelly-box-content">Generating: @(j.Income * globalIncomeMulti)</div>
+					</div>
+					<button @onclick="(() => BuyJellyBaseUpgrade(j))">Upgrade Base!</button>
+					<button @onclick="(() => BuyJellyMultiUpgrade(j))">Upgrade Multi!</button>
+				</div>
+			}
+		</div>
+	</div>
+	<div class="game-board-column">
+		<div class="jelly-click-container">
+			<img src="/Images/Jelly.jpg" asp-append-version="true" @onclick="@(() => PlayerClicked())" />
+		</div>
+	</div>
+	<div class="game-board-column">
+		<div class="stats-container">
+			<h4>Stats</h4>
+			<p>Score: @RoundUp(currency)</p>
+			<p>Income: @(income * globalIncomeMulti)</p>
+			<p>Click Power: @(clickPower * globalClickMulti)</p>
+		</div>
+		<div class="upgrades-container">
+			<h4>Upgrades</h4>
+			@foreach (var u in _clickPowerUpgrades)
+			{
+				@if (!u.Purchased)
+				{
+					<div class="jelly-box" @onclick="@(() => BuyClickPowerUpgrade(u))">
+						<div class="jelly-box-header">@u.Name</div>
+						<div class="jelly-box-content">Cost: @u.Cost</div>
+						<div class="jelly-box-content">@u.Description</div>
+					</div>
+				}
+			}
+			@foreach (var u in _clickMultiUpgrades)
+			{
+				@if (!u.Purchased)
+				{
+					<div class="jelly-box" @onclick="@(() => BuyClickMultiUpgrade(u))">
+						<div class="jelly-box-header">@u.Name</div>
+						<div class="jelly-box-content">Cost: @u.Cost</div>
+						<div class="jelly-box-content">@u.Description</div>
+					</div>
+				}
+			}
+			@foreach (var u in _incomeMultiUpgrades)
+			{
+				@if (!u.Purchased)
+				{
+					<div class="jelly-box" @onclick="@(() => BuyIncomeMultiUpgrade(u))">
+						<div class="jelly-box-header">@u.Name</div>
+						<div class="jelly-box-content">Cost: @u.Cost</div>
+						<div class="jelly-box-content">@u.Description</div>
+					</div>
+				}
+			}
+		</div>
+	</div>
+</div>
+
+
+@code {
+	private BlazorJellyClicker.Client.Pages.LoadModal LoadModal { get; set; } = new();
+	private BlazorJellyClicker.Client.Pages.SaveModal SaveModal { get; set; } = new();
+	private double currency = 0;
+	private double income = 0;
+	private double clickPower = 0;
+	private double globalClickMulti = 1;
+	private double globalIncomeMulti = 1;
+	private List<Jelly> _jellies = new();
+	private List<BaseUpgrade> _clickPowerUpgrades = new();
+	private List<MultiUpgrade> _clickMultiUpgrades = new();
+	private List<MultiUpgrade> _incomeMultiUpgrades = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		await FreshGameState();
+		var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+		while (await timer.WaitForNextTickAsync())
+		{
+			IncrementScore();
+			StateHasChanged();
+		}
+	}
+
+	private void PlayerClicked()
+	{
+		currency += (clickPower * globalClickMulti);
+	}
+
+	private void BuyJelly(double cost, double inc, string name, double multi)
+	{
+		if (currency >= cost)
+		{
+			switch (name)
+			{
+				case "Jelly":
+					_jellies[0].Count++;
+					_jellies[0].Cost = cost * 1.15;
+					_jellies[0].Income += (inc * multi);
+					break;
+				case "Large Jelly":
+					_jellies[1].Count++;
+					_jellies[1].Cost = cost * 1.15;
+					_jellies[1].Income += (inc * multi);
+					break;
+				case "Giga Jelly":
+					_jellies[2].Count++;
+					_jellies[2].Cost = cost * 1.15;
+					_jellies[2].Income += (inc * multi);
+					break;
+				case "Jelemental":
+					_jellies[3].Count++;
+					_jellies[3].Cost = cost * 1.15;
+					_jellies[3].Income += (inc * multi);
+					break;
+				case "Jellymancer":
+					_jellies[4].Count++;
+					_jellies[4].Cost = cost * 1.15;
+					_jellies[4].Income += (inc * multi);
+					break;
+				case "Jelich":
+					_jellies[5].Count++;
+					_jellies[5].Cost = cost * 1.15;
+					_jellies[5].Income += (inc * multi);
+					break;
+				default:
+					break;
+			}
+			currency -= cost;
+			income += inc;
+		}
+	}
+
+	private void BuyJellyBaseUpgrade(Jelly jelly)
+	{
+		var upgrades = jelly.BaseUpgrades.OrderBy(i => i.Id);
+		var nextUpgrade = upgrades.Where(i => !i.Purchased).FirstOrDefault();
+		if(nextUpgrade != null && currency > nextUpgrade.Cost)
+		{
+			currency -= nextUpgrade.Cost;
+			nextUpgrade.Purchased = true;
+			jelly.BaseIncome += nextUpgrade.BaseIncrease;
+			// Recalculate income
+			income -= jelly.Income;
+			jelly.Income = (jelly.BaseIncome * jelly.Count) * jelly.IncomeMulti;
+			income += jelly.Income;
+		}
+	}
+
+	private void BuyJellyMultiUpgrade(Jelly jelly)
+	{
+		var upgrades = jelly.MultiUpgrades.OrderBy(i => i.Id);
+		var nextUpgrade = upgrades.Where(i => !i.Purchased).FirstOrDefault();
+		if (nextUpgrade != null && currency > nextUpgrade.Cost)
+		{
+			currency -= nextUpgrade.Cost;
+			nextUpgrade.Purchased = true;
+			jelly.IncomeMulti += nextUpgrade.Multi;
+			// Recalculate income
+			income -= jelly.Income;
+			jelly.Income = (jelly.BaseIncome * jelly.Count) * jelly.IncomeMulti;
+			income += jelly.Income;
+		}
+	}
+
+	private void BuyClickPowerUpgrade(BaseUpgrade upgrade)
+	{
+		if(currency >= upgrade.Cost)
+		{
+			currency -= upgrade.Cost;
+			clickPower += upgrade.BaseIncrease;
+			upgrade.Purchased = true;
+		}
+	}
+
+	private void BuyClickMultiUpgrade(MultiUpgrade upgrade)
+	{
+		if(currency >= upgrade.Cost)
+		{
+			currency -= upgrade.Cost;
+			globalClickMulti += upgrade.Multi;
+			upgrade.Purchased = true;
+		}
+	}
+
+	private void BuyIncomeMultiUpgrade(MultiUpgrade upgrade)
+	{
+		if (currency >= upgrade.Cost)
+		{
+			currency -= upgrade.Cost;
+			globalIncomeMulti += upgrade.Multi;
+			upgrade.Purchased = true;
+		}
+	}
+
+	private void IncrementScore()
+	{
+		currency += (income * globalIncomeMulti);
+	}
+
+	private async Task<List<Jelly>> SetJellies()
+	{
+		var jellyData = await Http.GetFromJsonAsync<Jelly[]>("jellydata.json");
+		List<Jelly> jellies = new();
+		if (jellyData != null)
+		{
+			
+			foreach (var item in jellyData)
+			{
+				jellies.Add(new Jelly()
+					{
+						JellyId = item.JellyId,
+						Name = item.Name,
+						Description = item.Description,
+						BaseCost = item.BaseCost,
+						BaseIncome = item.BaseIncome,
+						Cost = item.BaseCost,
+						Income = 0,
+						IncomeMulti = 1,
+						Count = 0,
+						MultiUpgrades = item.MultiUpgrades,
+						BaseUpgrades = item.BaseUpgrades,
+					});
+			}
+		}
+		return jellies;
+	}
+
+	private async Task SetGlobalUpgrades()
+	{
+		_clickPowerUpgrades = await Http.GetFromJsonAsync<List<BaseUpgrade>>("clickpowerupgrades.json");
+		_clickMultiUpgrades = await Http.GetFromJsonAsync<List<MultiUpgrade>>("clickmultiupgrades.json");
+		_incomeMultiUpgrades = await Http.GetFromJsonAsync<List<MultiUpgrade>>("incomemultiupgrades.json");
+	}
+
+	private async void OpenSaveModal()
+	{
+		var userId = LocalStorage.GetItem<int>("userId");
+		var states = await Http.GetFromJsonAsync<List<GameState>>($"api/JellyClicker/GetStates/{userId}/");
+		if (states != null)
+		{
+			SaveModal.Open(states);
+		} else
+		{
+			await JsRuntime.InvokeVoidAsync("alert", "Could not retrieve existing saved data.");
+		}
+	}
+
+	private async void SaveState(SaveCallbackArgs args)
+	{
+		if(args.StateId < 0)
+		{
+			NewSave(args.Name);
+		} else
+		{
+			var gameState = new GameStateDto()
+				{
+					Id = args.StateId,
+					StateName = args.Name,
+					Jellies = _jellies,
+					Currency = currency,
+					ClickPowerUpgrades = _clickPowerUpgrades,
+					ClickMultiUpgrades = _clickMultiUpgrades,
+					IncomeMultiUpgrades = _incomeMultiUpgrades,
+					UserId = LocalStorage.GetItem<int>("userId"),
+				};
+			await Http.PostAsJsonAsync("api/JellyClicker/SaveState", gameState);
+		};
+		// if successful, give confirmation
+	}
+
+	private async void NewSave(string name)
+	{
+		var gameState = new GameStateDto()
+			{
+				StateName = name,
+				Jellies = _jellies,
+				Currency = currency,
+				ClickPowerUpgrades = _clickPowerUpgrades,
+				ClickMultiUpgrades = _clickMultiUpgrades,
+				IncomeMultiUpgrades = _incomeMultiUpgrades,
+				UserId = LocalStorage.GetItem<int>("userId"),
+			};
+
+		var asJson = JsonSerializer.Serialize(gameState);
+		await Http.PostAsJsonAsync("api/JellyClicker/NewSave", gameState);
+		// if successful, give confirmation
+	}
+
+	private async void OpenLoadModal()
+	{
+		var userId = LocalStorage.GetItem<int>("userId");
+		var states = await Http.GetFromJsonAsync<List<GameState>>($"api/JellyClicker/GetStates/{userId}/");
+		if (states != null)
+		{
+			LoadModal.Open(states);
+		}
+		else
+		{
+			await JsRuntime.InvokeVoidAsync("alert", "Could not retrieve existing saved data.");
+		}
+	}
+
+	public async void LoadState(int stateId)
+	{
+		var userId = LocalStorage.GetItem<int>("userId");
+		var stateData = await Http.GetFromJsonAsync<SavedState>($"api/JellyClicker/LoadState/{userId}/{stateId}");
+		
+		if(stateData == null)
+		{
+			return;
+		}
+		// If load successful, display "Loaded" message and set a fresh game state.
+		await FreshGameState();
+		// Load saved game state over the fresh state
+		currency = stateData.Currency;
+		// Load global upgrades
+		foreach(var up in _clickPowerUpgrades)
+		{
+			foreach(var savedUp in stateData.ClickPowerUpgrades)
+			{
+				if(savedUp.Purchased && up.Id == savedUp.Id)
+				{
+					up.Purchased = savedUp.Purchased;
+					clickPower += up.BaseIncrease;
+				}
+			}
+		}
+		foreach (var up in _clickMultiUpgrades)
+		{
+			foreach (var savedUp in stateData.ClickMultiUpgrades)
+			{
+				if (savedUp.Purchased && up.Id == savedUp.Id)
+				{
+					up.Purchased = savedUp.Purchased;
+					globalClickMulti += up.Multi;
+				}
+			}
+		}
+		foreach (var up in _incomeMultiUpgrades)
+		{
+			foreach (var savedUp in stateData.IncomeMultiUpgrades)
+			{
+				if (savedUp.Purchased && up.Id == savedUp.Id)
+				{
+					up.Purchased = savedUp.Purchased;
+					globalIncomeMulti += up.Multi;
+				}
+			}
+		}
+		// Load Jellies and their local upgrades
+		foreach(var item in _jellies)
+		{
+			foreach(var savedItem in stateData.Jellies)
+			{
+				if(item.JellyId == savedItem.JellyId && savedItem.Count > 0)
+				{
+					foreach (var up in item.BaseUpgrades)
+					{
+						foreach (var savedUp in savedItem.BaseUpgrades)
+						{
+							if (savedUp.Purchased && savedUp.Id == up.Id)
+							{
+								up.Purchased = true;
+								item.BaseIncome += up.BaseIncrease;
+							}
+						}
+					}
+					foreach(var up in item.MultiUpgrades)
+					{
+						foreach(var savedUp in savedItem.MultiUpgrades)
+						{
+							if(savedUp.Purchased && savedUp.Id == up.Id)
+							{
+								up.Purchased = true;
+								item.IncomeMulti += up.Multi;
+							}
+						}
+					}
+					item.Count = savedItem.Count;
+					item.Cost = item.BaseCost * (Math.Pow(1.15, item.Count));
+					item.Income = item.BaseIncome * item.Count * item.IncomeMulti;
+					income += item.Income;
+				}
+			}
+		}
+	}
+
+	private async Task FreshGameState()
+	{
+		currency = 0;
+		income = 0;
+		globalClickMulti = 1;
+		globalIncomeMulti = 1;
+		clickPower = 1 * globalClickMulti;
+		_jellies = await SetJellies();
+		await SetGlobalUpgrades();
+	}
+
+	private double RoundUp(double num)
+	{
+		return Math.Ceiling(num);
+	}
+}
