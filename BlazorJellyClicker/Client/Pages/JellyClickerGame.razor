@@ -1,5 +1,6 @@
 ﻿@page "/JellyClickerGame"
 @using BlazorJellyClicker.Client.Data;
+@using BlazorJellyClicker.Client.Helpers;
 @using BlazorJellyClicker.Shared.Data;
 @using BlazorJellyClicker.Shared.Models;
 @using Microsoft.AspNetCore.Authorization;
@@ -161,7 +162,7 @@
 					break;
 			}
 			currency -= cost;
-			income += inc;
+			income += (inc * multi);
 		}
 	}
 
@@ -238,7 +239,7 @@
 		List<Jelly> jellies = new();
 		if (jellyData != null)
 		{
-			
+
 			foreach (var item in jellyData)
 			{
 				jellies.Add(new Jelly()
@@ -269,8 +270,7 @@
 
 	private async void OpenSaveModal()
 	{
-		var userId = LocalStorage.GetItem<int>("userId");
-		var states = await Http.GetFromJsonAsync<List<GameState>>($"api/JellyClicker/GetStates/{userId}/");
+		var states = await Http.GetFromJsonAsync<List<GameState>>($"api/JellyClicker/GetStates");
 		if (states != null)
 		{
 			SaveModal.Open(states);
@@ -296,7 +296,6 @@
 					ClickPowerUpgrades = _clickPowerUpgrades,
 					ClickMultiUpgrades = _clickMultiUpgrades,
 					IncomeMultiUpgrades = _incomeMultiUpgrades,
-					UserId = LocalStorage.GetItem<int>("userId"),
 				};
 			await Http.PostAsJsonAsync("api/JellyClicker/SaveState", gameState);
 		};
@@ -313,7 +312,6 @@
 				ClickPowerUpgrades = _clickPowerUpgrades,
 				ClickMultiUpgrades = _clickMultiUpgrades,
 				IncomeMultiUpgrades = _incomeMultiUpgrades,
-				UserId = LocalStorage.GetItem<int>("userId"),
 			};
 
 		var asJson = JsonSerializer.Serialize(gameState);
@@ -323,8 +321,7 @@
 
 	private async void OpenLoadModal()
 	{
-		var userId = LocalStorage.GetItem<int>("userId");
-		var states = await Http.GetFromJsonAsync<List<GameState>>($"api/JellyClicker/GetStates/{userId}/");
+		var states = await Http.GetFromJsonAsync<List<GameState>>($"api/JellyClicker/GetStates");
 		if (states != null)
 		{
 			LoadModal.Open(states);
@@ -337,9 +334,8 @@
 
 	public async void LoadState(int stateId)
 	{
-		var userId = LocalStorage.GetItem<int>("userId");
-		var stateData = await Http.GetFromJsonAsync<SavedState>($"api/JellyClicker/LoadState/{userId}/{stateId}");
-		
+		var stateData = await Http.GetFromJsonAsync<SavedState>($"api/JellyClicker/LoadState/{stateId}");
+
 		if(stateData == null)
 		{
 			return;
@@ -426,7 +422,7 @@
 		income = 0;
 		globalClickMulti = 1;
 		globalIncomeMulti = 1;
-		clickPower = 1 * globalClickMulti;
+		clickPower = 1;
 		_jellies = await SetJellies();
 		await SetGlobalUpgrades();
 	}

@@ -1,5 +1,8 @@
-﻿@inject ISyncLocalStorageService LocalStorage
-@inject AuthenticationStateProvider AuthStateProvider
+﻿@using BlazorJellyClicker.Client.Helpers;
+@inject ISyncLocalStorageService LocalStorage
+@inject JwtAuthenticationStateProvider AuthStateProvider
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -64,8 +67,8 @@
 
     private async void Logout()
     {
-        LocalStorage.RemoveItem("username");
-        LocalStorage.RemoveItem("userId");
-        await AuthStateProvider.GetAuthenticationStateAsync();
+        AuthStateProvider.Logout();
+        Http.DefaultRequestHeaders.Remove("Authorization");
+        NavigationManager.NavigateTo("/");
     }
 }

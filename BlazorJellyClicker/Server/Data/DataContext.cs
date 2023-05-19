@@ -1,12 +1,13 @@
 ﻿using BlazorJellyClicker.Shared;
 using BlazorJellyClicker.Shared.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Configuration;
 
 namespace BlazorJellyClicker.Server.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User, Role, long>
 	{
 		public DbSet<GameState> GameState { get; set; }
 		public DbSet<User> User { get; set; }

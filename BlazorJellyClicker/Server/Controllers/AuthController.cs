@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Text;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace BlazorJellyClicker.Server.Controllers
 {
@@ -15,60 +16,62 @@ namespace BlazorJellyClicker.Server.Controllers
 	public class AuthController : ControllerBase
 	{
 		private readonly DataContext _context;
+		private readonly UserManager<User> _userManager;
+		private readonly SignInManager<User> _signInManager;
+		private readonly IConfiguration _config;
 
-		public AuthController(DataContext context)
+		public AuthController(DataContext context, UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration config)
 		{
 			_context = context;
+			_userManager = userManager;
+			_signInManager = signInManager;
+			_config = config;
 		}
 
 		[HttpPost("Register")]
-		public async Task<ActionResult<User>> Register(UserDto request)
+		public async Task<ActionResult> Register(UserDto request)
 		{
 			request.Username = request.Username.ToLower();
-			var existingUser = await _context.User.Where(x => x.Username == request.Username).FirstOrDefaultAsync();
+			var existingUser = await _context.User.Where(x => x.UserName == request.Username).FirstOrDefaultAsync();
 
 			if (existingUser != null)
 			{
-				return NotFound();
+				return BadRequest("A User with this name already exists.");
 			}
 
-			// passwordSalt - a random piece of data added to the password before running it through the password hashing algorithm, make it more secure
-			// passwordHash - an algorithm which morphs the password into a new string
-			CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 			User user = new User();
-			user.Username = request.Username;
-			user.PasswordHash = passwordHash;
-			user.PasswordSalt = passwordSalt;
-
-			_context.Add(user);
-			await _context.SaveChangesAsync();
-
-			return Ok(user);
+			user.UserName = request.Username;
+			
+			var result = await _userManager.CreateAsync(user, request.Password);
+			var succ = result.Succeeded;
+			if(result.Succeeded)
+			{
+				return Ok();
+			}
+			return BadRequest("Account couldn't be created, please try again later.");
 		}
 
 		[HttpPost("Login")]
-		public async Task<ActionResult<int>> Login(UserDto request)
+		public async Task<ActionResult<string>> Login(UserDto request)
 		{
 			request.Username = request.Username.ToLower();
-			var dbUser = await _context.User.Where(u => u.Username == request.Username).FirstOrDefaultAsync();
-			if (dbUser == null || dbUser.Username != request.Username)
+
+			var user = await _userManager.FindByNameAsync(request.Username);
+			if(user != null)
 			{
-				return NotFound();
-			}
-
-			if (!VerifyPasswordHash(request.Password, dbUser.PasswordHash, dbUser.PasswordSalt))
-			{
-				return NotFound();
-			}
-
-			/* Login should contain some JWT auth logic
-			 Generate refresh token, append to the User
-			 Save User with refresh token to DB
-			 Generate access token
-			 return Tokens
-			*/
-
-			return dbUser.Id;
+                var signIn = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+                if (signIn.Succeeded)
+                {
+                    string jwt = CreateJWT(user);
+                    AppendRefreshTokenCookie(user);
+                    return Ok(jwt);
+                }
+                else
+                {
+					return BadRequest("Username or Password is wrong.");
+                }
+            }
+			return BadRequest("Username or Password is wrong.");
 		}
 
 		private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -88,42 +91,62 @@ namespace BlazorJellyClicker.Server.Controllers
 				return computedHash.SequenceEqual(passwordHash);
 			}
 		}
-		/*
-		// Generate Refresh Token
-		private RefreshToken GenerateRefreshToken()
+
+        private void AppendRefreshTokenCookie(User user)
+        {
+            var options = new CookieOptions();
+            options.HttpOnly = true;
+            options.Secure = true;
+            options.SameSite = SameSiteMode.Strict;
+            options.Expires = DateTime.Now.AddMinutes(60);
+			HttpContext.Response.Cookies.Append(_config.GetSection("SecretKeys:RefreshKey").Value!, user.SecurityStamp, options);
+        }
+
+		public string RefreshToken()
 		{
-			RefreshToken refreshToken = new RefreshToken();
+            var cookie = HttpContext.Request.Cookies[_config.GetSection("SecretKeys:RefreshKey").Value!];
+            if (cookie != null)
+            {
+                var user = _userManager.Users.FirstOrDefault(user => user.SecurityStamp == cookie);
+                if (user != null)
+                {
+                    var jwtToken = CreateJWT(user);
+					return jwtToken;
+                }
+                else
+                {
+					return "";
+                }
+            }
+            else
+            {
+				return "";
+            }
+        }
 
-			var randomNumber = new byte[32];
-			using (var rng = RandomNumberGenerator.Create())
-			{
-				rng.GetBytes(randomNumber);
-				refreshToken.Token = Convert.ToBase64String(randomNumber);
-			}
-			refreshToken.ExpiryDate = DateTime.UtcNow.AddMonths(6);
-
-			return refreshToken;
-		}
-
-		// Generate Access Token
-		private string GenerateAccessToken(int userId)
+		public string CreateJWT(User user)
 		{
-			var tokenHandler = new JwtSecurityTokenHandler();
-			// This key is exposed!! JUST FOR TESTING
-			var key = Encoding.ASCII.GetBytes("thisisasecretkeyanddontsharewithanyone");
-			var tokenDescriptor = new SecurityTokenDescriptor
-			{
-				Subject = new ClaimsIdentity(new Claim[]
-				{
-					new Claim(ClaimTypes.Name, Convert.ToString(userId))
-				}),
-				Expires = DateTime.UtcNow.AddDays(1),
-				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-				SecurityAlgorithms.HmacSha256Signature)
-			};
-			var token = tokenHandler.CreateToken(tokenDescriptor);
-			return tokenHandler.WriteToken(token);
-		}
-		*/
-	}
+            var secretkey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_config.GetSection("SecretKeys:JwtKey").Value!));
+            var credentials = new SigningCredentials(secretkey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, user.UserName), // NOTE: this will be the "User.Identity.Name" value
+				// new Claim(ClaimTypes.Role, "User"),
+				//new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: "https://localhost:7172/",
+                audience: "https://localhost:7172/",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(60),
+                signingCredentials: credentials);
+
+            var JwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+			return JwtToken;
+        }
+		
+    }
 }

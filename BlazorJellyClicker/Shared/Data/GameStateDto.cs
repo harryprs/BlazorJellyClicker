@@ -16,6 +16,5 @@ namespace BlazorJellyClicker.Shared.Data
 		public List<BaseUpgrade> ClickPowerUpgrades { get; set; } = new List<BaseUpgrade>();
 		public List<MultiUpgrade> ClickMultiUpgrades { get; set; } = new List<MultiUpgrade>();
 		public List<MultiUpgrade> IncomeMultiUpgrades { get; set; } = new List<MultiUpgrade>(); 
-		public int UserId { get; set; }
 	}
 }

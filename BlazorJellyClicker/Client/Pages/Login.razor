@@ -1,8 +1,9 @@
 ﻿@page "/login"
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService LocalStorage
-@inject AuthenticationStateProvider AuthStateProvider
+@inject JwtAuthenticationStateProvider AuthStateProvider
 @inject HttpClient Http
+@using BlazorJellyClicker.Client.Helpers;
 @using BlazorJellyClicker.Shared.Data;
 @using BlazorJellyClicker.Shared.Models;
 @using Blazored.LocalStorage;
@@ -33,19 +34,13 @@
 	{
 		var user = this.userDto;
 		var result = await Http.PostAsJsonAsync("api/Auth/Login", user);
-		// Depending on login behaviour, change the authentication state
-		// To do that, make a call to the web service to check the password
-		// If right, using JWT authentication return a token to this client
-		// store this token in a SECURE storage or cookie - is LocalStorage secure enough?
-		// This will also solve the problem with server-side authorization - I can choose what to expose on the API endpoints and to who
 		if (result.IsSuccessStatusCode)
 		{
-			// Very far from Ideal! All I have to do is edit my username and userId in localstorage and I have access to another users data - use JWT instead
-			var id = await result.Content.ReadFromJsonAsync<int>();
-			await LocalStorage.SetItemAsync<int>("userId", id);
-			await LocalStorage.SetItemAsync<string>("username", userDto.Username);
-			await AuthStateProvider.GetAuthenticationStateAsync();
-			NavigationManager.NavigateTo("");
+			var token = await result.Content.ReadAsStringAsync();
+			AuthStateProvider.Login(token);
+			await LocalStorage.SetItemAsStringAsync("jwtToken", token);
+			Http.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+			NavigationManager.NavigateTo("/");
 		} else
 		{
 			NavigationManager.NavigateTo("login");
