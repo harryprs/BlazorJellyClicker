@@ -102,14 +102,26 @@ a, .btn-link {
 
 .index-title {
     display: block;
+    margin: auto;
+    min-width: 400px;
+    max-width: 800px;
     text-align: center;
     font-size: 28px;
+    border: 5px solid black;
+    border-radius: 20px;
+    padding: 10px;s
 }
 
 .index-body {
     display: block;
+    margin: 4px auto 4px auto;
+    min-width: 400px;
+    max-width: 800px;
     text-align: left;
     font-size: 16px;
+    border: 5px solid black;
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .index-link {
@@ -153,6 +165,9 @@ a, .btn-link {
     flex-direction: column;
     justify-content: left;
     margin-bottom: 10px;
+    border: 5px solid black;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 .jelly-box {
@@ -185,15 +200,17 @@ a, .btn-link {
 .stats-container {
     height: 33%;
     width: 100%;
-    border: 1px solid black;
+    border: 5px solid black;
+    border-radius: 10px;
     margin: 2px 2px 2px 2px;
-    padding: 2px;
+    padding: 5px;
 }
 
 .upgrades-container {
     height: 66%;
     width: 100%;
-    border: 1px solid black;
+    border: 5px solid black;
+    border-radius: 10px;
     margin: 2px 2px 2px 2px;
-    padding: 2px;
+    padding: 5px;
 }

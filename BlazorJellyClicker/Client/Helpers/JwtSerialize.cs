@@ -17,7 +17,6 @@ namespace BlazorJellyClicker.Client.Helpers
                 throw new Exception("Invalid JWT");
             }
 
-            Console.WriteLine(segments[1]);
             var dataSegment = Encoding.UTF8.GetString(FromUrlBase64(segments[1]));
             var data = JsonSerializer.Deserialize<JsonObject>(dataSegment);
 
