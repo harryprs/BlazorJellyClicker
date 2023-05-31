@@ -148,9 +148,32 @@ a, .btn-link {
     justify-content: center;
 }
 
+.jelly-page-header-bar {
+    text-align: center;
+    padding: 10px;
+}
+
+.jelly-page-header {
+    display: inline;
+}
+
+.state-modal-btns {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    float: right;
+    position: relative;
+}
+
 .game-board {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
     display: flex;
-    justify-content:space-between;
+    flex-wrap: wrap;
 }
 
 .game-board-column {
@@ -170,22 +193,38 @@ a, .btn-link {
     padding: 5px;
 }
 
-.jelly-box {
-    height: 120px;
+.jelly-shop-card {
+    height: 130px;
     width: 100%;
     border: 1px solid black;
-    display: inline-block;
+    display: flex;
     margin: 2px 2px 2px 2px;
     padding: 2px;
 }
 
-.jelly-box-header {
+.jelly-shop-card-left {
+    width: 50%;
+}
+
+.jelly-shop-card-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.jelly-shop-card-btns {
+    display: flex;
+}
+
+.jelly-shop-card-header {
     text-align: left;
     font-size: 16px;
     height: 30%;
 }
 
-.jelly-box-content {
+.jelly-shop-card-content {
     text-align: left;
     font-size: 13px;
 }
@@ -213,4 +252,15 @@ a, .btn-link {
     border-radius: 10px;
     margin: 2px 2px 2px 2px;
     padding: 5px;
+    overflow: auto;
+}
+
+.upgrades-card {
+    height: 130px;
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    margin: 2px 2px 2px 2px;
+    padding: 2px;
 }

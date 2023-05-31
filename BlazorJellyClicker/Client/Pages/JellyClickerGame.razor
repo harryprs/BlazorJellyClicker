@@ -14,39 +14,44 @@
 @inject IJSRuntime JsRuntime
 @attribute [Authorize]
 
-<h3>Jelly Clicker</h3>
-
-<div>
-	<BlazorJellyClicker.Client.Pages.LoadModal @ref="LoadModal" OnDoneCallback="LoadState"></BlazorJellyClicker.Client.Pages.LoadModal>
-	<BlazorJellyClicker.Client.Pages.SaveModal @ref="SaveModal" OnDoneCallback="SaveState"></BlazorJellyClicker.Client.Pages.SaveModal>
-	<button @onclick="() => OpenSaveModal()">Save Game</button>
-	<button @onclick="() => OpenLoadModal()">Load Game</button>
+<div class="jelly-page-header-bar">
+	<h1 class="jelly-page-header">Jelly Clicker</h1>
+	<div class="state-modal-btns">
+		<BlazorJellyClicker.Client.Pages.LoadModal @ref="LoadModal" OnDoneCallback="LoadState"></BlazorJellyClicker.Client.Pages.LoadModal>
+		<BlazorJellyClicker.Client.Pages.SaveModal @ref="SaveModal" OnDoneCallback="SaveState"></BlazorJellyClicker.Client.Pages.SaveModal>
+		<button @onclick="() => OpenSaveModal()">Save Game</button>
+		<button @onclick="() => OpenLoadModal()">Load Game</button>
+	</div>
 </div>
-
 <div class="game-board">
-	<div class="game-board-column">
+	<div class="col-lg-4 col-md-6 order-lg-first">
 		<div class="jelly-shop-container">
 			@foreach (var j in _jellies)
 			{
-				<div class="jelly-box" >
-					<div @onclick="@(() => BuyJelly(j.Cost, j.BaseIncome, j.Name, j.IncomeMulti))">
-						<div class="jelly-box-header">@j.Name: @j.Count</div>
-						<div class="jelly-box-content">Cost: @RoundUp(j.Cost)</div>
-						<div class="jelly-box-content">+@(j.BaseIncome * j.IncomeMulti * globalIncomeMulti)</div>
-						<div class="jelly-box-content">Generating: @(j.Income * globalIncomeMulti)</div>
+				<div class="jelly-shop-card">
+					<div class="jelly-shop-card-left" @onclick="@(() => BuyJelly(j.Cost, j.BaseIncome, j.Name, j.IncomeMulti))">
+						<div class="jelly-shop-card-header">@j.Name: @j.Count</div>
+						<div class="jelly-shop-card-content">Cost: @RoundUp(j.Cost)</div>
+						<div class="jelly-shop-card-content">+@(j.BaseIncome * j.IncomeMulti * globalIncomeMulti)</div>
+						<div class="jelly-shop-card-content">Generating: @(j.Income * globalIncomeMulti)</div>
 					</div>
-					<button @onclick="(() => BuyJellyBaseUpgrade(j))">Upgrade Base!</button>
-					<button @onclick="(() => BuyJellyMultiUpgrade(j))">Upgrade Multi!</button>
+					<div class="jelly-shop-card-right">
+						<img src="/Images/JellyImg.jpg" />
+						<div class="jelly-shop-card-btns">
+							<button @onclick="(() => BuyJellyBaseUpgrade(j))">Base+</button>
+							<button @onclick="(() => BuyJellyMultiUpgrade(j))">x1</button>
+						</div>
+					</div>
 				</div>
 			}
 		</div>
 	</div>
-	<div class="game-board-column">
+	<div class="col-lg-4 col-md-12 order-md-first">
 		<div class="jelly-click-container">
 			<img src="/Images/Jelly.jpg" asp-append-version="true" @onclick="@(() => PlayerClicked())" />
 		</div>
 	</div>
-	<div class="game-board-column">
+	<div class="col-lg-4 col-md-6">
 		<div class="stats-container">
 			<h4>Stats</h4>
 			<p>Score: @RoundUp(currency)</p>
@@ -59,10 +64,10 @@
 			{
 				@if (!u.Purchased)
 				{
-					<div class="jelly-box" @onclick="@(() => BuyClickPowerUpgrade(u))">
-						<div class="jelly-box-header">@u.Name</div>
-						<div class="jelly-box-content">Cost: @u.Cost</div>
-						<div class="jelly-box-content">@u.Description</div>
+					<div class="upgrades-card" @onclick="@(() => BuyClickPowerUpgrade(u))">
+						<div class="jelly-shop-card-header">@u.Name</div>
+						<div class="jelly-shop-card-content">Cost: @u.Cost</div>
+						<div class="jelly-shop-card-content">@u.Description</div>
 					</div>
 				}
 			}
@@ -70,10 +75,10 @@
 			{
 				@if (!u.Purchased)
 				{
-					<div class="jelly-box" @onclick="@(() => BuyClickMultiUpgrade(u))">
-						<div class="jelly-box-header">@u.Name</div>
-						<div class="jelly-box-content">Cost: @u.Cost</div>
-						<div class="jelly-box-content">@u.Description</div>
+					<div class="upgrades-card" @onclick="@(() => BuyClickMultiUpgrade(u))">
+						<div class="jelly-shop-card-header">@u.Name</div>
+						<div class="jelly-shop-card-content">Cost: @u.Cost</div>
+						<div class="jelly-shop-card-content">@u.Description</div>
 					</div>
 				}
 			}
@@ -81,10 +86,10 @@
 			{
 				@if (!u.Purchased)
 				{
-					<div class="jelly-box" @onclick="@(() => BuyIncomeMultiUpgrade(u))">
-						<div class="jelly-box-header">@u.Name</div>
-						<div class="jelly-box-content">Cost: @u.Cost</div>
-						<div class="jelly-box-content">@u.Description</div>
+					<div class="upgrades-card" @onclick="@(() => BuyIncomeMultiUpgrade(u))">
+						<div class="jelly-shop-card-header">@u.Name</div>
+						<div class="jelly-shop-card-content">Cost: @u.Cost</div>
+						<div class="jelly-shop-card-content">@u.Description</div>
 					</div>
 				}
 			}
