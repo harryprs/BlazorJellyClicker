@@ -61,6 +61,7 @@ namespace BlazorJellyClicker.Client.Helpers
 
             switch (jwtSegment.Length % 4)
             {
+                case 0: break;
                 case 2: fixedBase64 += "=="; break;
                 case 3: fixedBase64 += "="; break;
                 default: throw new Exception("Illegal base64url string!");
