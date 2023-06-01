@@ -200,24 +200,36 @@ a, .btn-link {
     width: 100%;
     border: 1px solid black;
     display: flex;
+    flex-direction: column;
+    margin: 2px 2px 2px 2px;
+    padding: 2px;
+}
+
+.jelly-shop-card-details {
+    height: 100%;
+    width: 100%;
+    display: flex;
     margin: 2px 2px 2px 2px;
     padding: 2px;
 }
 
 .jelly-shop-card-left {
+    height: 100%;
     width: 50%;
 }
 
 .jelly-shop-card-right {
+    height: 100%;
     width: 50%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    margin: auto;
 }
 
 .jelly-shop-card-btns {
     display: flex;
+    justify-content: end;
+    padding-right: 5px;
 }
 
 .jelly-shop-card-header {
@@ -284,4 +296,48 @@ a, .btn-link {
 .jelly-click-shrink {
     width: 90%;
     height: 90%;
+}
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-span {
+    visibility: hidden;
+    position: absolute;
+    width: 120px;
+    bottom: 50%;
+    left: 95%;
+    background-color: #363636;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    z-index: 1;
+}
+
+    tooltip-span::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 30%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+
+.tooltip-wrapper:hover span {
+    visibility: visible;
+}
+
+.jelly-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    height: 75%;
+}
+
+.jelly-tooltip-wrapper:hover span {
+    visibility: visible;
 }
