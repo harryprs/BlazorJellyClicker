@@ -32,14 +32,14 @@
 					<div class="jelly-shop-card-left" @onclick="@(() => BuyJelly(j.Cost, j.BaseIncome, j.Name, j.IncomeMulti))">
 						<div class="jelly-shop-card-header">@j.Name: @j.Count</div>
 						<div class="jelly-shop-card-content">Cost: @RoundUp(j.Cost)</div>
-						<div class="jelly-shop-card-content">+@(j.BaseIncome * j.IncomeMulti * globalIncomeMulti)</div>
-						<div class="jelly-shop-card-content">Generating: @(j.Income * globalIncomeMulti)</div>
+						<div class="jelly-shop-card-content">+@(j.BaseIncome * j.IncomeMulti * globalIncomeMulti) Jellies/sec</div>
+						<div class="jelly-shop-card-content">Generating: @(j.Income * globalIncomeMulti) Jellies/sec</div>
 					</div>
 					<div class="jelly-shop-card-right">
 						<img src="/Images/JellyImg.jpg" />
 						<div class="jelly-shop-card-btns">
 							<button @onclick="(() => BuyJellyBaseUpgrade(j))">Base+</button>
-							<button @onclick="(() => BuyJellyMultiUpgrade(j))">x1</button>
+							<button @onclick="(() => BuyJellyMultiUpgrade(j))">Multi+</button>
 						</div>
 					</div>
 				</div>
@@ -47,14 +47,16 @@
 		</div>
 	</div>
 	<div class="col-lg-4 col-md-12 order-md-first">
-		<div class="jelly-click-container">
-			<img src="/Images/Jelly.jpg" asp-append-version="true" @onclick="@(() => PlayerClicked())" />
+		<div class="jelly-click-padding">
+			<div class="jelly-click-container">
+				<img src="/Images/Jelly.jpg" asp-append-version="true" @onclick="@(() => PlayerClicked())" class="@JellyClickClass" @onmouseover="JellyClickMouseOver" @onmouseout="JellyClickMouseOut" @onmousedown="JellyClickMouseDown" @onmouseup="JellyClickMouseUp" />
+			</div>
 		</div>
 	</div>
 	<div class="col-lg-4 col-md-6">
 		<div class="stats-container">
 			<h4>Stats</h4>
-			<p>Score: @RoundUp(currency)</p>
+			<p>Jellies: @RoundUp(currency)</p>
 			<p>Income: @(income * globalIncomeMulti)</p>
 			<p>Click Power: @(clickPower * globalClickMulti)</p>
 		</div>
@@ -110,6 +112,13 @@
 	private List<BaseUpgrade> _clickPowerUpgrades = new();
 	private List<MultiUpgrade> _clickMultiUpgrades = new();
 	private List<MultiUpgrade> _incomeMultiUpgrades = new();
+
+	string JellyClickClass { get; set; }
+	void JellyClickMouseOver(MouseEventArgs e) { JellyClickClass = "jelly-click-grow"; }
+	void JellyClickMouseOut(MouseEventArgs e) { JellyClickClass = ""; }
+	void JellyClickMouseDown(MouseEventArgs e) { JellyClickClass = "jelly-click-shrink"; }
+	void JellyClickMouseUp(MouseEventArgs e) { JellyClickClass = "jelly-click-grow"; }
+
 
 	protected override async Task OnInitializedAsync()
 	{

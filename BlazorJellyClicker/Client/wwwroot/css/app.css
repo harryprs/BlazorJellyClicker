@@ -141,6 +141,8 @@ a, .btn-link {
 
 .state-container-title {
     display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .div-center {
@@ -160,13 +162,13 @@ a, .btn-link {
 .state-modal-btns {
     display: inline-block;
     background-color: black;
-    color: white;
     float: right;
     position: relative;
 }
 
 .game-board {
     width: 100%;
+    max-width: 1280px;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -229,11 +231,19 @@ a, .btn-link {
     font-size: 13px;
 }
 
+.jelly-click-padding {
+    margin: auto;
+    height: 220px;
+    width: 220px;
+}
+
 .jelly-click-container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 200px;
+    max-width: 200px;
+    margin: auto;
 }
 
 .stats-container {
@@ -243,6 +253,7 @@ a, .btn-link {
     border-radius: 10px;
     margin: 2px 2px 2px 2px;
     padding: 5px;
+    font-size: 1.2rem;
 }
 
 .upgrades-container {
@@ -263,4 +274,14 @@ a, .btn-link {
     flex-direction: column;
     margin: 2px 2px 2px 2px;
     padding: 2px;
+}
+
+.jelly-click-grow {
+    width: 110%;
+    height: 110%;
+}
+
+.jelly-click-shrink {
+    width: 90%;
+    height: 90%;
 }
