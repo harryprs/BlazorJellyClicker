@@ -157,9 +157,17 @@
 	{
 		var upgrades = u.OrderBy(i => i.Id);
 		var nextUpgrade = upgrades.Where(i => !i.Purchased).FirstOrDefault();
-		shopTooltip.shopTooltipName = nextUpgrade.Name;
-		shopTooltip.shopTooltipDesc = nextUpgrade.Description;
-		shopTooltip.shopTooltipCost = "Cost: " + @FormatNumber(nextUpgrade.Cost);
+		if(nextUpgrade == null)
+		{
+			shopTooltip.shopTooltipName = "MAXED";
+			shopTooltip.shopTooltipDesc = "No more upgrades of this type!";
+			shopTooltip.shopTooltipCost = "";
+		} else
+		{
+			shopTooltip.shopTooltipName = nextUpgrade.Name;
+			shopTooltip.shopTooltipDesc = nextUpgrade.Description;
+			shopTooltip.shopTooltipCost = "Cost: " + @FormatNumber(nextUpgrade.Cost);
+		}
 	}
 
 	private void PlayerClicked()
