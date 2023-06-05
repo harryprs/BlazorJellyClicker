@@ -178,14 +178,12 @@ a, .btn-link {
     flex-wrap: wrap;
 }
 
-.game-board-column {
-    height: 100%;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
+.game-board-col {
+    max-height: 1080px;
 }
 
 .jelly-shop-container {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: left;

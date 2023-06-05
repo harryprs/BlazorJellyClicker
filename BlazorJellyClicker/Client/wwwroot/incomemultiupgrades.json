@@ -4,8 +4,62 @@
     "Name": "Income Multiplier I",
     "Description": "Multiply ALL Income by 15%!",
     "Multi": 0.15,
-    "Cost": 1000,
+    "Cost": 25000.0,
     "Purchased": false,
     "OrderInSeries": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Income Multiplier II",
+    "Description": "Multiply ALL Income by 15%!",
+    "Multi": 0.15,
+    "Cost": 625000.0,
+    "Purchased": false,
+    "OrderInSeries": 2
+  },
+  {
+    "Id": 3,
+    "Name": "Income Multiplier III",
+    "Description": "Multiply ALL Income by 15%!",
+    "Multi": 0.15,
+    "Cost": 15000000.0,
+    "Purchased": false,
+    "OrderInSeries": 3
+  },
+  {
+    "Id": 4,
+    "Name": "Income Multiplier IV",
+    "Description": "Multiply ALL Income by 15%!",
+    "Multi": 0.15,
+    "Cost": 390000000.0,
+    "Purchased": false,
+    "OrderInSeries": 4
+  },
+  {
+    "Id": 5,
+    "Name": "Income Multiplier V",
+    "Description": "Multiply ALL Income by 15%!",
+    "Multi": 0.15,
+    "Cost": 9700000000.0,
+    "Purchased": false,
+    "OrderInSeries": 5
+  },
+  {
+    "Id": 6,
+    "Name": "Income Multiplier VI",
+    "Description": "Multiply ALL Income by 15%!",
+    "Multi": 0.15,
+    "Cost": 240000000000.0,
+    "Purchased": false,
+    "OrderInSeries": 6
+  },
+  {
+    "Id": 7,
+    "Name": "Income Multiplier VII",
+    "Description": "Multiply ALL Income by 15%!",
+    "Multi": 0.15,
+    "Cost": 1200000000000.0,
+    "Purchased": false,
+    "OrderInSeries": 7
   }
 ]

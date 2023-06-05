@@ -4,17 +4,125 @@
     "Name": "Click Powerup I",
     "Description": "Increase Click Power by 1!",
     "BaseIncrease": 1,
-    "Cost": 50,
+    "Cost": 250.0,
     "Purchased": false,
     "OrderInSeries": 1
   },
   {
     "Id": 2,
     "Name": "Click Powerup II",
-    "Description": "Increase Click Power by 5!",
-    "BaseIncrease": 5,
-    "Cost": 500,
+    "Description": "Increase Click Power by 2!",
+    "BaseIncrease": 2,
+    "Cost": 1000.0,
     "Purchased": false,
     "OrderInSeries": 2
+  },
+  {
+    "Id": 3,
+    "Name": "Click Powerup III",
+    "Description": "Increase Click Power by 3!",
+    "BaseIncrease": 3,
+    "Cost": 5000.0,
+    "Purchased": false,
+    "OrderInSeries": 3
+  },
+  {
+    "Id": 4,
+    "Name": "Click Powerup IV",
+    "Description": "Increase Click Power by 4!",
+    "BaseIncrease": 4,
+    "Cost": 25000.0,
+    "Purchased": false,
+    "OrderInSeries": 4
+  },
+  {
+    "Id": 5,
+    "Name": "Click Powerup V",
+    "Description": "Increase Click Power by 5!",
+    "BaseIncrease": 5,
+    "Cost": 125000.0,
+    "Purchased": false,
+    "OrderInSeries": 5
+  },
+  {
+    "Id": 6,
+    "Name": "Click Powerup VI",
+    "Description": "Increase Click Power by 10!",
+    "BaseIncrease": 10,
+    "Cost": 625000.0,
+    "Purchased": false,
+    "OrderInSeries": 6
+  },
+  {
+    "Id": 7,
+    "Name": "Click Powerup VII",
+    "Description": "Increase Click Power by 15!",
+    "BaseIncrease": 15,
+    "Cost": 3000000.0,
+    "Purchased": false,
+    "OrderInSeries": 7
+  },
+  {
+    "Id": 8,
+    "Name": "Click Powerup VIII",
+    "Description": "Increase Click Power by 20!",
+    "BaseIncrease": 20,
+    "Cost": 15000000.0,
+    "Purchased": false,
+    "OrderInSeries": 8
+  },
+  {
+    "Id": 9,
+    "Name": "Click Powerup IX",
+    "Description": "Increase Click Power by 30!",
+    "BaseIncrease": 30,
+    "Cost": 78000000.0,
+    "Purchased": false,
+    "OrderInSeries": 9
+  },
+  {
+    "Id": 10,
+    "Name": "Click Powerup X",
+    "Description": "Increase Click Power by 50!",
+    "BaseIncrease": 50,
+    "Cost": 390000000.0,
+    "Purchased": false,
+    "OrderInSeries": 10
+  },
+  {
+    "Id": 11,
+    "Name": "Click Powerup XI",
+    "Description": "Increase Click Power by 75!",
+    "BaseIncrease": 75,
+    "Cost": 1950000000.0,
+    "Purchased": false,
+    "OrderInSeries": 12
+  },
+  {
+    "Id": 12,
+    "Name": "Click Powerup XII",
+    "Description": "Increase Click Power by 100!",
+    "BaseIncrease": 100,
+    "Cost": 9700000000.0,
+    "Purchased": false,
+    "OrderInSeries": 12
+  },
+  {
+    "Id": 13,
+    "Name": "Click Powerup XIII",
+    "Description": "Increase Click Power by 150!",
+    "BaseIncrease": 150,
+    "Cost": 48000000000.0,
+    "Purchased": false,
+    "OrderInSeries": 13
+  },
+  {
+    "Id": 14,
+    "Name": "Click Powerup XIV",
+    "Description": "Increase Click Power by 200!",
+    "BaseIncrease": 200,
+    "Cost": 240000000000.0,
+    "Purchased": false,
+    "OrderInSeries": 14
   }
 ]

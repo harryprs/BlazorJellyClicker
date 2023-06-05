@@ -2,10 +2,127 @@
   {
     "Id": 1,
     "Name": "Click Multiplier I",
-    "Description": "Multiply Click Power by 50%!",
-    "Multi": 0.50,
-    "Cost": 200,
+    "Description": "Increase Click Power Multiplier by 100%!",
+    "Multi": 1.0,
+    "Cost": 1000.0,
     "Purchased": false,
     "OrderInSeries": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Click Multiplier II",
+    "Description": "Increase Click Power Multiplier by 100%!",
+    "Multi": 1.0,
+    "Cost": 5000.0,
+    "Purchased": false,
+    "OrderInSeries": 2
+  },
+  {
+    "Id": 3,
+    "Name": "Click Multiplier III",
+    "Description": "Increase Click Power Multiplier by 200%!",
+    "Multi": 2.0,
+    "Cost": 25000.0,
+    "Purchased": false,
+    "OrderInSeries": 3
+  },
+  {
+    "Id": 4,
+    "Name": "Click Multiplier IV",
+    "Description": "Increase Click Power Multiplier by 200%!",
+    "Multi": 2.0,
+    "Cost": 125000.0,
+    "Purchased": false,
+    "OrderInSeries": 4
+  },
+  {
+    "Id": 5,
+    "Name": "Click Multiplier V",
+    "Description": "Increase Click Power Multiplier by 300%!",
+    "Multi": 3.0,
+    "Cost": 625000.0,
+    "Purchased": false,
+    "OrderInSeries": 5
+  },
+  {
+    "Id": 6,
+    "Name": "Click Multiplier VI",
+    "Description": "Increase Click Power Multiplier by 300%!",
+    "Multi": 3.0,
+    "Cost": 3000000.0,
+    "Purchased": false,
+    "OrderInSeries": 6
+  },
+  {
+    "Id": 7,
+    "Name": "Click Multiplier VII",
+    "Description": "Increase Click Power Multiplier by 400%!",
+    "Multi": 4.0,
+    "Cost": 15000000.0,
+    "Purchased": false,
+    "OrderInSeries": 7
+  },
+  {
+    "Id": 8,
+    "Name": "Click Multiplier VIII",
+    "Description": "Increase Click Power Multiplier by 400%!",
+    "Multi": 4.0,
+    "Cost": 78000000.0,
+    "Purchased": false,
+    "OrderInSeries": 8
+  },
+  {
+    "Id": 9,
+    "Name": "Click Multiplier IX",
+    "Description": "Increase Click Power Multiplier by 500%!",
+    "Multi": 5.0,
+    "Cost": 390000000.0,
+    "Purchased": false,
+    "OrderInSeries": 9
+  },
+  {
+    "Id": 10,
+    "Name": "Click Multiplier X",
+    "Description": "Increase Click Power Multiplier by 500%!",
+    "Multi": 5.0,
+    "Cost": 1950000000.0,
+    "Purchased": false,
+    "OrderInSeries": 10
+  },
+  {
+    "Id": 11,
+    "Name": "Click Multiplier XI",
+    "Description": "Increase Click Power Multiplier by 600%!",
+    "Multi": 6.0,
+    "Cost": 9700000000.0,
+    "Purchased": false,
+    "OrderInSeries": 11
+  },
+  {
+    "Id": 12,
+    "Name": "Click Multiplier XII",
+    "Description": "Increase Click Power Multiplier by 600%!",
+    "Multi": 6.0,
+    "Cost": 48000000000.0,
+    "Purchased": false,
+    "OrderInSeries": 12
+  },
+  {
+    "Id": 13,
+    "Name": "Click Multiplier XIII",
+    "Description": "Increase Click Power Multiplier by 700%!",
+    "Multi": 7.0,
+    "Cost": 240000000000.0,
+    "Purchased": false,
+    "OrderInSeries": 13
+  },
+  {
+    "Id": 14,
+    "Name": "Click Multiplier XIV",
+    "Description": "Increase Click Power Multiplier by 700%!",
+    "Multi": 7.0,
+    "Cost": 1200000000000.0,
+    "Purchased": false,
+    "OrderInSeries": 14
   }
 ]
