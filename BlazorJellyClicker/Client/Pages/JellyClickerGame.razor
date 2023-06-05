@@ -29,28 +29,38 @@
 			@foreach (var j in _jellies)
 			{
 				<div class="jelly-shop-card">
-					<Tooltip Class="jelly-tooltip-wrapper" Text="@j.Description">
-						<div class="jelly-shop-card-details">
-							<div class="jelly-shop-card-left" @onclick="@(() => BuyJelly(j.Cost, j.BaseIncome, j.Name, j.IncomeMulti))">
-								<div class="jelly-shop-card-header">@j.Name: @j.Count</div>
-								<div class="jelly-shop-card-content">Cost: @RoundUp(j.Cost)</div>
-								<div class="jelly-shop-card-content">+@(j.BaseIncome * j.IncomeMulti * globalIncomeMulti) Jellies/sec</div>
-								<div class="jelly-shop-card-content">Generating: @(j.Income * globalIncomeMulti) Jellies/sec</div>
-							</div>
-							<div class="jelly-shop-card-right">
-								<img src="/Images/JellyImg.jpg" />
-							</div>
+					<div class="jelly-shop-card-header">@j.Name: @j.Count</div>
+					<div class="jelly-shop-card-details" @onclick="@(() => BuyJelly(j.Cost, j.BaseIncome, j.Name, j.IncomeMulti))" @onmouseover="@(() => UpdateJellyTooltipContainer(j))">
+						<div class="jelly-shop-card-left">
+							<div class="jelly-shop-card-content">Cost: @RoundUp(j.Cost)</div>
+							<div class="jelly-shop-card-content">+@RoundUp(j.BaseIncome * j.IncomeMulti * globalIncomeMulti) Jellies/sec</div>
+							<div class="jelly-shop-card-content">Generating: @RoundUp(j.Income * globalIncomeMulti) Jellies/sec</div>
 						</div>
-					</Tooltip>
+						<div class="jelly-shop-card-right">
+							<img src="@j.ImageSrc" />
+						</div>
+					</div>
 					<div class="jelly-shop-card-btns">
-						<button @onclick="(() => BuyJellyBaseUpgrade(j))">Base+</button>
-						<button @onclick="(() => BuyJellyMultiUpgrade(j))">Multi+</button>
+						<button @onclick="(() => BuyJellyBaseUpgrade(j))" @onmouseover="(() => UpdateUpgradeTooltipContainer(j.BaseUpgrades.Cast<Upgrade>().ToList()))">Base+</button>
+						<button @onclick="(() => BuyJellyMultiUpgrade(j))" @onmouseover="(() => UpdateUpgradeTooltipContainer(j.MultiUpgrades.Cast<Upgrade>().ToList()))">Multi+</button>
 					</div>
 				</div>
 			}
 		</div>
 	</div>
 	<div class="col-lg-4 col-md-12 order-md-first game-board-col">
+		<div class="shop-tooltip-container">
+			<h4>@shopTooltip.shopTooltipName</h4>
+			<div class="shop-tooltip-flex">
+				<div class="shop-tooltip-left-col">
+					<p>@shopTooltip.shopTooltipDesc</p>
+					<p>@shopTooltip.shopTooltipCost</p>
+				</div>
+				<div class="shop-tooltip-right-col">
+					<img src="@shopTooltip.imageSrc" />
+				</div>
+			</div>
+		</div>
 		<div class="jelly-click-padding">
 			<div class="jelly-click-container">
 				<img src="/Images/Jelly.jpg" asp-append-version="true" @onclick="@(() => PlayerClicked())" class="@JellyClickClass" @onmouseover="JellyClickMouseOver" @onmouseout="JellyClickMouseOut" @onmousedown="JellyClickMouseDown" @onmouseup="JellyClickMouseUp" />
@@ -61,7 +71,7 @@
 		<div class="stats-container">
 			<h4>Stats</h4>
 			<p>Jellies: @RoundUp(currency)</p>
-			<p>Income: @(income * globalIncomeMulti)</p>
+			<p>Income: @RoundUp(income * globalIncomeMulti)</p>
 			<p>Click Power: @(clickPower * globalClickMulti)</p>
 		</div>
 		<div class="upgrades-container">
@@ -116,6 +126,7 @@
 	private List<BaseUpgrade> _clickPowerUpgrades = new();
 	private List<MultiUpgrade> _clickMultiUpgrades = new();
 	private List<MultiUpgrade> _incomeMultiUpgrades = new();
+	private ShopTooltip shopTooltip = new();
 
 	string JellyClickClass { get; set; }
 	void JellyClickMouseOver(MouseEventArgs e) { JellyClickClass = "jelly-click-grow"; }
@@ -132,6 +143,23 @@
 			IncrementScore();
 			StateHasChanged();
 		}
+	}
+
+	private void UpdateJellyTooltipContainer(Jelly j)
+	{
+		shopTooltip.shopTooltipDesc = j.Description;
+		shopTooltip.shopTooltipName = j.Name;
+		shopTooltip.shopTooltipCost = "Cost: " + @RoundUp(j.Cost);
+		shopTooltip.imageSrc = "/Images/JellyImg.jpg";
+	}
+
+	private void UpdateUpgradeTooltipContainer(List<Upgrade> u)
+	{
+		var upgrades = u.OrderBy(i => i.Id);
+		var nextUpgrade = upgrades.Where(i => !i.Purchased).FirstOrDefault();
+		shopTooltip.shopTooltipName = nextUpgrade.Name;
+		shopTooltip.shopTooltipDesc = nextUpgrade.Description;
+		shopTooltip.shopTooltipCost = "Cost: " + nextUpgrade.Cost;
 	}
 
 	private void PlayerClicked()
@@ -312,6 +340,7 @@
 						Count = 0,
 						MultiUpgrades = item.MultiUpgrades,
 						BaseUpgrades = item.BaseUpgrades,
+						ImageSrc = "/Images/JellyImg.jpg"
 					});
 			}
 		}

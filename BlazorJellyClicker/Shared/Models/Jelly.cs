@@ -13,5 +13,6 @@
         public int Count { get; set; }
         public List<MultiUpgrade> MultiUpgrades { get; set; } = new();
         public List<BaseUpgrade> BaseUpgrades { get; set; } = new();
+        public string ImageSrc { get; set; } = string.Empty;
 	}
 }
