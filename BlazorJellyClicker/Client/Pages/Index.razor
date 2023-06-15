@@ -12,18 +12,19 @@
 		<p>Click on the jelly to harvest it!</p>
 		<p>Buy various different Jellies to gain passive income!</p>
 		<p>Buy upgrades to boost specific jellies, reduce cost, increase your clicking power or global income!</p>
+		
 		<AuthorizeView>
-			<Authorized>
-				<div class="index-link">
-					<p>Welcome @AuthStateProvider.DisplayName!</p>
-					<a href="jellyclickergame">Play Game!</a>
-				</div>
-			</Authorized>
 			<NotAuthorized>
 				<a class="index-link" href="register">Register</a>
 				<a class="index-link" href="login">Login</a>
 			</NotAuthorized>
+			<Authorized>
+				<p class="index-link">Welcome @AuthStateProvider.DisplayName!</p>
+			</Authorized>
 		</AuthorizeView>
+		<div class="index-link">
+			<a href="jellyclickergame">Play Game!</a>
+		</div>
 	</div>
 	
 	<p>Built by Harry Parsons</p>

@@ -7,21 +7,30 @@
 @using Microsoft.Extensions.Configuration
 @using Blazored.LocalStorage;
 @using System.Text.Json;
+@using System.Text;
 @inject IConfiguration Configuration
-@inject ISyncLocalStorageService LocalStorage
+@inject ILocalStorageService LocalStorage
 @inject AuthenticationStateProvider AuthStateProvider
 @inject HttpClient Http
 @inject IJSRuntime JsRuntime
-@attribute [Authorize]
 
 <div class="jelly-page-header-bar">
 	<h1 class="jelly-page-header">Jelly Clicker</h1>
-	<div class="state-modal-btns">
-		<BlazorJellyClicker.Client.Pages.LoadModal @ref="LoadModal" OnDoneCallback="LoadState"></BlazorJellyClicker.Client.Pages.LoadModal>
-		<BlazorJellyClicker.Client.Pages.SaveModal @ref="SaveModal" OnDoneCallback="SaveState"></BlazorJellyClicker.Client.Pages.SaveModal>
-		<button @onclick="() => OpenSaveModal()">Save Game</button>
-		<button @onclick="() => OpenLoadModal()">Load Game</button>
-	</div>
+	<AuthorizeView>
+		<Authorized>
+			<div class="state-modal-btns">
+				<BlazorJellyClicker.Client.Pages.LoadModal @ref="LoadModal" OnDoneCallback="LoadStateCallback"></BlazorJellyClicker.Client.Pages.LoadModal>
+				<BlazorJellyClicker.Client.Pages.SaveModal @ref="SaveModal" OnDoneCallback="SaveState"></BlazorJellyClicker.Client.Pages.SaveModal>
+				<button @onclick="() => OpenSaveModal()">Save Game</button>
+				<button @onclick="() => OpenLoadModal()">Load Game</button>
+			</div>
+		</Authorized>
+		<NotAuthorized>
+			<div>
+				<p>Register/Login to Save/Load your game!</p>
+			</div>
+		</NotAuthorized>
+	</AuthorizeView>
 </div>
 <div class="game-board">
 	<div class="col-lg-4 col-md-6 order-lg-first game-board-col">
@@ -115,8 +124,10 @@
 
 
 @code {
+
 	private BlazorJellyClicker.Client.Pages.LoadModal LoadModal { get; set; } = new();
 	private BlazorJellyClicker.Client.Pages.SaveModal SaveModal { get; set; } = new();
+	private int tick = 0;
 	private double currency = 0;
 	private double income = 0;
 	private double clickPower = 0;
@@ -136,12 +147,25 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		await FreshGameState();
+		if (await LocalStorage.ContainKeyAsync("localSave"))
+		{
+			LoadStateFromLocalStorage();
+		}
+		else
+		{
+			await FreshGameState();
+		}
 		var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
 		while (await timer.WaitForNextTickAsync())
 		{
 			IncrementScore();
 			StateHasChanged();
+			tick++;
+			if(tick > 300)
+			{
+				SaveStateToLocalStorage();
+				tick = 0;
+			}
 		}
 	}
 
@@ -374,6 +398,38 @@
 		}
 	}
 
+	private async void SaveStateToLocalStorage()
+	{
+		List<JellyState> jellyStates = new List<JellyState>();
+		foreach (var jelly in _jellies)
+		{
+			jellyStates.Add(new JellyState
+				{
+					JellyId = jelly.JellyId,
+					Count = jelly.Count,
+					BaseUpgrades = (from j in jelly.BaseUpgrades
+									select new UpgradeState() { Id = j.Id, Purchased = j.Purchased }).ToList(),
+					MultiUpgrades = (from j in jelly.MultiUpgrades
+									 select new UpgradeState() { Id = j.Id, Purchased = j.Purchased }).ToList()
+				});
+		};
+
+		SavedState savedState = new SavedState()
+		{
+			Jellies = jellyStates,
+			ClickMultiUpgrades = (from u in _clickMultiUpgrades
+									select new UpgradeState() { Id = u.Id, Purchased = u.Purchased }).ToList(),
+			ClickPowerUpgrades = (from u in _clickPowerUpgrades
+									select new UpgradeState() { Id = u.Id, Purchased = u.Purchased }).ToList(),
+			IncomeMultiUpgrades = (from u in _incomeMultiUpgrades
+									select new UpgradeState() { Id = u.Id, Purchased = u.Purchased }).ToList(),
+			Currency = currency
+		};
+
+		var stateBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(savedState)));
+		await LocalStorage.SetItemAsStringAsync("localSave", stateBase64);
+	}
+
 	private async void SaveState(SaveCallbackArgs args)
 	{
 		if(args.StateId < 0)
@@ -393,7 +449,6 @@
 				};
 			await Http.PostAsJsonAsync("api/JellyClicker/SaveState", gameState);
 		};
-		// if successful, give confirmation
 	}
 
 	private async void NewSave(string name)
@@ -410,7 +465,6 @@
 
 		var asJson = JsonSerializer.Serialize(gameState);
 		await Http.PostAsJsonAsync("api/JellyClicker/NewSave", gameState);
-		// if successful, give confirmation
 	}
 
 	private async void OpenLoadModal()
@@ -426,15 +480,25 @@
 		}
 	}
 
-	public async void LoadState(int stateId)
+	public async void LoadStateCallback(int stateId)
 	{
 		var stateData = await Http.GetFromJsonAsync<SavedState>($"api/JellyClicker/LoadState/{stateId}");
+		LoadState(stateData);
+	}
 
+	public async void LoadStateFromLocalStorage()
+	{
+		var savedState = JsonSerializer.Deserialize<SavedState>(Encoding.UTF8.GetString(Convert.FromBase64String(await LocalStorage.GetItemAsStringAsync("localSave"))));
+		LoadState(savedState);
+	}
+
+	public async void LoadState(SavedState stateData)
+	{
 		if(stateData == null)
 		{
 			return;
 		}
-		// If load successful, display "Loaded" message and set a fresh game state.
+
 		await FreshGameState();
 		// Load saved game state over the fresh state
 		currency = stateData.Currency;
