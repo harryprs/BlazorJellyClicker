@@ -160,11 +160,16 @@ a, .btn-link {
 }
 
 .state-modal-btns {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     background-color: black;
     float: right;
     position: relative;
 }
+
+    button {
+        margin: 1px;
+    }
 
 .game-board {
     width: 100%;
@@ -367,4 +372,16 @@ a, .btn-link {
 
 .jelly-tooltip-wrapper:hover span {
     visibility: visible;
+}
+
+.block {
+    padding: 8px;
+    margin: 2px;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+.import-export-textarea {
+    height: 200px;
+    width: 100%;
 }

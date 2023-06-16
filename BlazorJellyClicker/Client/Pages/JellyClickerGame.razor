@@ -16,21 +16,20 @@
 
 <div class="jelly-page-header-bar">
 	<h1 class="jelly-page-header">Jelly Clicker</h1>
-	<AuthorizeView>
-		<Authorized>
-			<div class="state-modal-btns">
+	<div class="state-modal-btns">
+		<AuthorizeView>
+			<Authorized>
 				<BlazorJellyClicker.Client.Pages.LoadModal @ref="LoadModal" OnDoneCallback="LoadStateCallback"></BlazorJellyClicker.Client.Pages.LoadModal>
 				<BlazorJellyClicker.Client.Pages.SaveModal @ref="SaveModal" OnDoneCallback="SaveState"></BlazorJellyClicker.Client.Pages.SaveModal>
 				<button @onclick="() => OpenSaveModal()">Save Game</button>
 				<button @onclick="() => OpenLoadModal()">Load Game</button>
-			</div>
-		</Authorized>
-		<NotAuthorized>
-			<div>
-				<p>Register/Login to Save/Load your game!</p>
-			</div>
-		</NotAuthorized>
-	</AuthorizeView>
+			</Authorized>
+		</AuthorizeView>
+		<BlazorJellyClicker.Client.Pages.ExportModal @ref="ExportModal"></BlazorJellyClicker.Client.Pages.ExportModal>
+		<BlazorJellyClicker.Client.Pages.ImportModal @ref="ImportModal" OnDoneCallback="ImportGame"></BlazorJellyClicker.Client.Pages.ImportModal>
+		<button @onclick="() => OpenExportModal()">Export Game</button>
+		<button @onclick="() => OpenImportModal()">Import Game</button>
+	</div>
 </div>
 <div class="game-board">
 	<div class="col-lg-4 col-md-6 order-lg-first game-board-col">
@@ -127,6 +126,8 @@
 
 	private BlazorJellyClicker.Client.Pages.LoadModal LoadModal { get; set; } = new();
 	private BlazorJellyClicker.Client.Pages.SaveModal SaveModal { get; set; } = new();
+	private BlazorJellyClicker.Client.Pages.ExportModal ExportModal { get; set; } = new();
+	private BlazorJellyClicker.Client.Pages.ImportModal ImportModal { get; set; } = new();
 	private int tick = 0;
 	private double currency = 0;
 	private double income = 0;
@@ -400,18 +401,24 @@
 
 	private async void SaveStateToLocalStorage()
 	{
+		var stateBase64 = ConvertSavedStateToBase64String();
+		await LocalStorage.SetItemAsStringAsync("localSave", stateBase64);
+	}
+
+	private string ConvertSavedStateToBase64String()
+	{
 		List<JellyState> jellyStates = new List<JellyState>();
 		foreach (var jelly in _jellies)
 		{
 			jellyStates.Add(new JellyState
-				{
-					JellyId = jelly.JellyId,
-					Count = jelly.Count,
-					BaseUpgrades = (from j in jelly.BaseUpgrades
-									select new UpgradeState() { Id = j.Id, Purchased = j.Purchased }).ToList(),
-					MultiUpgrades = (from j in jelly.MultiUpgrades
-									 select new UpgradeState() { Id = j.Id, Purchased = j.Purchased }).ToList()
-				});
+			{
+				JellyId = jelly.JellyId,
+				Count = jelly.Count,
+				BaseUpgrades = (from j in jelly.BaseUpgrades
+								select new UpgradeState() { Id = j.Id, Purchased = j.Purchased }).ToList(),
+				MultiUpgrades = (from j in jelly.MultiUpgrades
+									select new UpgradeState() { Id = j.Id, Purchased = j.Purchased }).ToList()
+			});
 		};
 
 		SavedState savedState = new SavedState()
@@ -427,7 +434,7 @@
 		};
 
 		var stateBase64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(savedState)));
-		await LocalStorage.SetItemAsStringAsync("localSave", stateBase64);
+		return stateBase64;
 	}
 
 	private async void SaveState(SaveCallbackArgs args)
@@ -467,6 +474,24 @@
 		await Http.PostAsJsonAsync("api/JellyClicker/NewSave", gameState);
 	}
 
+	private async void OpenImportModal()
+	{
+		ImportModal.Open();
+	}
+
+	private async void OpenExportModal()
+	{
+		var stateBase64 = ConvertSavedStateToBase64String();
+		if (stateBase64 != null)
+		{
+			ExportModal.Open(stateBase64);
+		}
+		else
+		{
+			await JsRuntime.InvokeVoidAsync("alert", "Could not retrieving existing saved data.");
+		}
+	}
+
 	private async void OpenLoadModal()
 	{
 		var states = await Http.GetFromJsonAsync<List<GameState>>($"api/JellyClicker/GetStates");
@@ -480,16 +505,42 @@
 		}
 	}
 
+	public async void ImportGame(string importState)
+	{
+		var savedState = JsonSerializer.Deserialize<SavedState>(Encoding.UTF8.GetString(Convert.FromBase64String(importState)));
+		if (savedState != null)
+		{
+			LoadState(savedState);
+		} else
+		{
+			await JsRuntime.InvokeVoidAsync("alert", "Could not retrieve saved data.");
+		}
+	}
+
 	public async void LoadStateCallback(int stateId)
 	{
-		var stateData = await Http.GetFromJsonAsync<SavedState>($"api/JellyClicker/LoadState/{stateId}");
-		LoadState(stateData);
+		var savedState = await Http.GetFromJsonAsync<SavedState>($"api/JellyClicker/LoadState/{stateId}");
+		if (savedState != null)
+		{
+			LoadState(savedState);
+		}
+		else
+		{
+			await JsRuntime.InvokeVoidAsync("alert", "Could not retrieve saved data.");
+		}
 	}
 
 	public async void LoadStateFromLocalStorage()
 	{
 		var savedState = JsonSerializer.Deserialize<SavedState>(Encoding.UTF8.GetString(Convert.FromBase64String(await LocalStorage.GetItemAsStringAsync("localSave"))));
-		LoadState(savedState);
+		if (savedState != null)
+		{
+			LoadState(savedState);
+		}
+		else
+		{
+			await JsRuntime.InvokeVoidAsync("alert", "Could not retrieve saved data.");
+		}
 	}
 
 	public async void LoadState(SavedState stateData)
