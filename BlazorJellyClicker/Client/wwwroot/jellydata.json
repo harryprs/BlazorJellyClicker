@@ -4,7 +4,7 @@
     "Name": "Jelly",
     "BaseCost": 15.0,
     "BaseIncome": 0.1,
-    "Description": "Just like Mother makes",
+    "Description": "Strawberry!",
     "BaseUpgrades": [
       {
         "Id": 1,
@@ -63,7 +63,7 @@
         "OrderInSeries": 1
       },
       {
-        "Id": 1,
+        "Id": 2,
         "Name": "Multi Upgrade II",
         "Description": "Increase Income Multiplier of Jelly by 100%!",
         "Multi": 1.0,
@@ -72,7 +72,7 @@
         "OrderInSeries": 1
       },
       {
-        "Id": 1,
+        "Id": 3,
         "Name": "Multi Upgrade III",
         "Description": "Increase Income Multiplier of Jelly by 100%!",
         "Multi": 1.0,
@@ -81,7 +81,7 @@
         "OrderInSeries": 1
       },
       {
-        "Id": 1,
+        "Id": 4,
         "Name": "Multi Upgrade IV",
         "Description": "Increase Income Multiplier of Jelly by 100%!",
         "Multi": 1.0,
@@ -90,7 +90,7 @@
         "OrderInSeries": 1
       },
       {
-        "Id": 1,
+        "Id": 5,
         "Name": "Multi Upgrade V",
         "Description": "Increase Income Multiplier of Jelly by 100%!",
         "Multi": 1.0,
@@ -105,7 +105,7 @@
     "Name": "Large Jelly",
     "BaseCost": 100.0,
     "BaseIncome": 1.0,
-    "Description": "You but better",
+    "Description": "Large Strawberry!",
     "BaseUpgrades": [
       {
         "Id": 1,
@@ -115,6 +115,42 @@
         "Cost": 200.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Large Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 400.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Large Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 800.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Large Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 1600.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Large Jelly by 1!",
+        "BaseIncrease": 1,
+        "Cost": 3200.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -126,6 +162,42 @@
         "Cost": 500.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Large Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 2500.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Large Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 12500.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Large Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 62500.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Large Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 312500.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
@@ -134,7 +206,7 @@
     "Name": "PB&J",
     "BaseCost": 1100.0,
     "BaseIncome": 8.0,
-    "Description": "",
+    "Description": "Only 500 calories each.",
     "BaseUpgrades": [
       {
         "Id": 1,
@@ -144,6 +216,42 @@
         "Cost": 2200.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each PB&J by 4!",
+        "BaseIncrease": 4,
+        "Cost": 4400.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each PB&J by 4!",
+        "BaseIncrease": 4,
+        "Cost": 8800.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each PB&J by 4!",
+        "BaseIncrease": 4,
+        "Cost": 17600.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each PB&J by 4!",
+        "BaseIncrease": 4,
+        "Cost": 35200.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -155,6 +263,42 @@
         "Cost": 5500.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of PB&J by 100%!",
+        "Multi": 1.0,
+        "Cost": 27500.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of PB&J by 100%!",
+        "Multi": 1.0,
+        "Cost": 137500.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of PB&J by 100%!",
+        "Multi": 1.0,
+        "Cost": 687500.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of PB&J by 100%!",
+        "Multi": 1.0,
+        "Cost": 3437500.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
@@ -163,7 +307,7 @@
     "Name": "Giga Jelly",
     "BaseCost": 12000.0,
     "BaseIncome": 47.0,
-    "Description": "",
+    "Description": "Serves 10.",
     "BaseUpgrades": [
       {
         "Id": 1,
@@ -173,6 +317,42 @@
         "Cost": 24000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Giga Jelly by 10!",
+        "BaseIncrease": 10,
+        "Cost": 48000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Giga Jelly by 10!",
+        "BaseIncrease": 10,
+        "Cost": 96000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Giga Jelly by 10!",
+        "BaseIncrease": 10,
+        "Cost": 192000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Giga Jelly by 10!",
+        "BaseIncrease": 10,
+        "Cost": 384000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -184,6 +364,42 @@
         "Cost": 60000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Giga Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 300000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Giga Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 1500000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Giga Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 7500000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Giga Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 37500000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
@@ -192,7 +408,7 @@
     "Name": "Jellyfish",
     "BaseCost": 130000.0,
     "BaseIncome": 230.0,
-    "Description": "",
+    "Description": "Mould design spec was confusing.",
     "BaseUpgrades": [
       {
         "Id": 1,
@@ -202,6 +418,42 @@
         "Cost": 260000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Jellyfish by 20!",
+        "BaseIncrease": 20,
+        "Cost": 520000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Jellyfish by 20!",
+        "BaseIncrease": 20,
+        "Cost": 1040000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Jellyfish by 20!",
+        "BaseIncrease": 20,
+        "Cost": 2080000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Jellyfish by 20!",
+        "BaseIncrease": 20,
+        "Cost": 4080000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -213,6 +465,42 @@
         "Cost": 650000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Jellyfish by 100%!",
+        "Multi": 1.0,
+        "Cost": 3250000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Jellyfish by 100%!",
+        "Multi": 1.0,
+        "Cost": 16250000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Jellyfish by 100%!",
+        "Multi": 1.0,
+        "Cost": 81250000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Jellyfish by 100%!",
+        "Multi": 1.0,
+        "Cost": 406250000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
@@ -221,7 +509,7 @@
     "Name": "Jelfling",
     "BaseCost": 1400000.0,
     "BaseIncome": 1400.0,
-    "Description": "",
+    "Description": "Tireless pudding chefs.",
     "BaseUpgrades": [
       {
         "Id": 1,
@@ -231,6 +519,42 @@
         "Cost": 2800000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Jelfling by 100!",
+        "BaseIncrease": 100,
+        "Cost": 5600000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Jelfling by 100!",
+        "BaseIncrease": 100,
+        "Cost": 11200000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Jelfling by 100!",
+        "BaseIncrease": 100,
+        "Cost": 22400000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Jelfling by 100!",
+        "BaseIncrease": 100,
+        "Cost": 44800000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -242,53 +566,96 @@
         "Cost": 7000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Jelfling by 100%!",
+        "Multi": 1.0,
+        "Cost": 35000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Jelfling by 100%!",
+        "Multi": 1.0,
+        "Cost": 175000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Jelfling by 100%!",
+        "Multi": 1.0,
+        "Cost": 875000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Jelfling by 100%!",
+        "Multi": 1.0,
+        "Cost": 4375000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
   {
     "JellyId": 7,
-    "Name": "Jelly Jenerator",
+    "Name": "Jelemental",
     "BaseCost": 15000000.0,
     "BaseIncome": 8000.0,
-    "Description": "",
+    "Description": "It seems somehow alive.",
     "BaseUpgrades": [
       {
         "Id": 1,
         "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Jelly Jenerator by 800!",
+        "Description": "Increase Base Income of each Jelemental by 800!",
         "BaseIncrease": 800,
-        "Cost": 15000000.0,
+        "Cost": 30000000.0,
         "Purchased": false,
         "OrderInSeries": 1
-      }
-    ],
-    "MultiUpgrades": [
+      },
       {
-        "Id": 1,
-        "Name": "Multi Upgrade I",
-        "Description": "Increase Income Multiplier of Jelly Jenerator by 100%!",
-        "Multi": 1.0,
-        "Cost": 75000000.0,
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Jelemental by 800!",
+        "BaseIncrease": 800,
+        "Cost": 60000000.0,
         "Purchased": false,
-        "OrderInSeries": 1
-      }
-    ]
-  },
-  {
-    "JellyId": 8,
-    "Name": "Jelemental",
-    "BaseCost": 160000000.0,
-    "BaseIncome": 45000.0,
-    "Description": "",
-    "BaseUpgrades": [
+        "OrderInSeries": 2
+      },
       {
-        "Id": 1,
-        "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Jelemental by 5000!",
-        "BaseIncrease": 5000,
-        "Cost": 320000000.0,
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Jelemental by 800!",
+        "BaseIncrease": 800,
+        "Cost": 120000000.0,
         "Purchased": false,
-        "OrderInSeries": 1
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Jelemental by 800!",
+        "BaseIncrease": 800,
+        "Cost": 240000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Jelemental by 800!",
+        "BaseIncrease": 800,
+        "Cost": 480000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -297,27 +664,99 @@
         "Name": "Multi Upgrade I",
         "Description": "Increase Income Multiplier of Jelemental by 100%!",
         "Multi": 1.0,
-        "Cost": 800000000.0,
+        "Cost": 75000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Jelemental by 100%!",
+        "Multi": 1.0,
+        "Cost": 375000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Jelemental by 100%!",
+        "Multi": 1.0,
+        "Cost": 1875000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Jelemental by 100%!",
+        "Multi": 1.0,
+        "Cost": 9375000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Jelemental by 100%!",
+        "Multi": 1.0,
+        "Cost": 46875000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
   {
-    "JellyId": 9,
+    "JellyId": 8,
     "Name": "Jellymancer",
-    "BaseCost": 1695000000.0,
-    "BaseIncome": 250000.0,
-    "Description": "",
+    "BaseCost": 160000000.0,
+    "BaseIncome": 45000.0,
+    "Description": "A fancier title for a pudding chef.",
     "BaseUpgrades": [
       {
         "Id": 1,
         "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Jellymancer by 12000!",
-        "BaseIncrease": 12000.0,
-        "Cost": 3390000000.0,
+        "Description": "Increase Base Income of each Jellymancer by 5000!",
+        "BaseIncrease": 5000,
+        "Cost": 320000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Jellymancer by 5000!",
+        "BaseIncrease": 5000,
+        "Cost": 640000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Jellymancer by 5000!",
+        "BaseIncrease": 5000,
+        "Cost": 1280000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Jellymancer by 5000!",
+        "BaseIncrease": 5000,
+        "Cost": 2560000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Jellymancer by 5000!",
+        "BaseIncrease": 5000,
+        "Cost": 5120000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -326,56 +765,99 @@
         "Name": "Multi Upgrade I",
         "Description": "Increase Income Multiplier of Jellymancer by 100%!",
         "Multi": 1.0,
-        "Cost": 8475000000.0,
+        "Cost": 800000000.0,
         "Purchased": false,
         "OrderInSeries": 1
-      }
-    ]
-  },
-  {
-    "JellyId": 10,
-    "Name": "Jell-o",
-    "BaseCost": 17800000000.0,
-    "BaseIncome": 1700000.0,
-    "Description": "",
-    "BaseUpgrades": [
+      },
       {
-        "Id": 1,
-        "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Jell-o by 100000!",
-        "BaseIncrease": 100000.0,
-        "Cost": 35600000000.0,
-        "Purchased": false,
-        "OrderInSeries": 1
-      }
-    ],
-    "MultiUpgrades": [
-      {
-        "Id": 1,
-        "Name": "Multi Upgrade I",
-        "Description": "Increase Income Multiplier of Jell-o by 100%!",
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Jellymancer by 100%!",
         "Multi": 1.0,
-        "Cost": 89000000000.0,
+        "Cost": 4000000000.0,
         "Purchased": false,
-        "OrderInSeries": 1
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Jellymancer by 100%!",
+        "Multi": 1.0,
+        "Cost": 20000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Jellymancer by 100%!",
+        "Multi": 1.0,
+        "Cost": 100000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Jellymancer by 100%!",
+        "Multi": 1.0,
+        "Cost": 500000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
   {
-    "JellyId": 11,
+    "JellyId": 9,
     "Name": "Mimic Jelly",
-    "BaseCost": 186000000000.0,
-    "BaseIncome": 11000000.0,
-    "Description": "",
+    "BaseCost": 1695000000.0,
+    "BaseIncome": 250000.0,
+    "Description": "Sometimes takes on other forms.",
     "BaseUpgrades": [
       {
         "Id": 1,
         "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Mimic Jelly by 1000000!",
-        "BaseIncrease": 1000000.0,
-        "Cost": 372000000000.0,
+        "Description": "Increase Base Income of each Mimic Jelly by 12000!",
+        "BaseIncrease": 12000.0,
+        "Cost": 3390000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Mimic Jelly by 12000!",
+        "BaseIncrease": 12000.0,
+        "Cost": 6780000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Mimic Jelly by 12000!",
+        "BaseIncrease": 12000.0,
+        "Cost": 13560000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Mimic Jelly by 12000!",
+        "BaseIncrease": 12000.0,
+        "Cost": 27120000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Mimic Jelly by 12000!",
+        "BaseIncrease": 12000.0,
+        "Cost": 54240000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -384,56 +866,99 @@
         "Name": "Multi Upgrade I",
         "Description": "Increase Income Multiplier of Mimic Jelly by 100%!",
         "Multi": 1.0,
-        "Cost": 930000000000.0,
+        "Cost": 8475000000.0,
         "Purchased": false,
         "OrderInSeries": 1
-      }
-    ]
-  },
-  {
-    "JellyId": 12,
-    "Name": "Gelatinous Cube",
-    "BaseCost": 1925000000000.0,
-    "BaseIncome": 65000000.0,
-    "Description": "",
-    "BaseUpgrades": [
+      },
       {
-        "Id": 1,
-        "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Gelatinous Cube by 2500000!",
-        "BaseIncrease": 2500000,
-        "Cost": 3850000000000.0,
-        "Purchased": false,
-        "OrderInSeries": 1
-      }
-    ],
-    "MultiUpgrades": [
-      {
-        "Id": 1,
-        "Name": "Multi Upgrade I",
-        "Description": "Increase Income Multiplier of Gelatinous Cube by 100%!",
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Mimic Jelly by 100%!",
         "Multi": 1.0,
-        "Cost": 9625000000000.0,
+        "Cost": 42375000000.0,
         "Purchased": false,
-        "OrderInSeries": 1
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Mimic Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 211875000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Mimic Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 1059375000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Mimic Jelly by 100%!",
+        "Multi": 1.0,
+        "Cost": 5296875000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
   {
-    "JellyId": 13,
+    "JellyId": 10,
     "Name": "Engorged Gelatinous Cube",
-    "BaseCost": 20000000000000.0,
-    "BaseIncome": 350000000.0,
-    "Description": "",
+    "BaseCost": 17800000000.0,
+    "BaseIncome": 1700000.0,
+    "Description": "Contains traces of.. everything.",
     "BaseUpgrades": [
       {
         "Id": 1,
         "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Engorged Gelatinous Cube by 12500000!",
-        "BaseIncrease": 12500000,
-        "Cost": 40000000000000.0,
+        "Description": "Increase Base Income of each Engorged Gelatinous Cube by 100000!",
+        "BaseIncrease": 100000.0,
+        "Cost": 35600000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Engorged Gelatinous Cube by 100000!",
+        "BaseIncrease": 100000.0,
+        "Cost": 71200000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Engorged Gelatinous Cube by 100000!",
+        "BaseIncrease": 100000.0,
+        "Cost": 142400000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Engorged Gelatinous Cube by 100000!",
+        "BaseIncrease": 100000.0,
+        "Cost": 284800000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Engorged Gelatinous Cube by 100000!",
+        "BaseIncrease": 100000.0,
+        "Cost": 569600000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -442,27 +967,99 @@
         "Name": "Multi Upgrade I",
         "Description": "Increase Income Multiplier of Engorged Gelatinous Cube by 100%!",
         "Multi": 1.0,
-        "Cost": 100000000000000.0,
+        "Cost": 89000000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Engorged Gelatinous Cube by 100%!",
+        "Multi": 1.0,
+        "Cost": 445000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Engorged Gelatinous Cube by 100%!",
+        "Multi": 1.0,
+        "Cost": 2225000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Engorged Gelatinous Cube by 100%!",
+        "Multi": 1.0,
+        "Cost": 11125000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Engorged Gelatinous Cube by 100%!",
+        "Multi": 1.0,
+        "Cost": 55625000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   },
   {
-    "JellyId": 14,
+    "JellyId": 11,
     "Name": "Jelich",
-    "BaseCost": 200000000000000.0,
-    "BaseIncome": 2400000000.0,
-    "Description": "",
+    "BaseCost": 186000000000.0,
+    "BaseIncome": 11000000.0,
+    "Description": "Served inside its own Phylactery.",
     "BaseUpgrades": [
       {
         "Id": 1,
         "Name": "Base Upgrade I",
-        "Description": "Increase Base Income of each Jelich by 125000000!",
-        "BaseIncrease": 125000000,
-        "Cost": 400000000000000.0,
+        "Description": "Increase Base Income of each Jelich by 1000000!",
+        "BaseIncrease": 1000000.0,
+        "Cost": 372000000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Base Upgrade II",
+        "Description": "Increase Base Income of each Jelich by 1000000!",
+        "BaseIncrease": 1000000.0,
+        "Cost": 744000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Base Upgrade III",
+        "Description": "Increase Base Income of each Jelich by 1000000!",
+        "BaseIncrease": 1000000.0,
+        "Cost": 1488000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Base Upgrade IV",
+        "Description": "Increase Base Income of each Jelich by 1000000!",
+        "BaseIncrease": 1000000.0,
+        "Cost": 2976000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Base Upgrade V",
+        "Description": "Increase Base Income of each Jelich by 1000000!",
+        "BaseIncrease": 1000000.0,
+        "Cost": 5952000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ],
     "MultiUpgrades": [
@@ -471,9 +1068,45 @@
         "Name": "Multi Upgrade I",
         "Description": "Increase Income Multiplier of Jelich by 100%!",
         "Multi": 1.0,
-        "Cost": 1000000000000000.0,
+        "Cost": 930000000000.0,
         "Purchased": false,
         "OrderInSeries": 1
+      },
+      {
+        "Id": 2,
+        "Name": "Multi Upgrade II",
+        "Description": "Increase Income Multiplier of Jelich by 100%!",
+        "Multi": 1.0,
+        "Cost": 4650000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 2
+      },
+      {
+        "Id": 3,
+        "Name": "Multi Upgrade III",
+        "Description": "Increase Income Multiplier of Jelich by 100%!",
+        "Multi": 1.0,
+        "Cost": 23250000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 3
+      },
+      {
+        "Id": 4,
+        "Name": "Multi Upgrade IV",
+        "Description": "Increase Income Multiplier of Jelich by 100%!",
+        "Multi": 1.0,
+        "Cost": 116250000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 4
+      },
+      {
+        "Id": 5,
+        "Name": "Multi Upgrade V",
+        "Description": "Increase Income Multiplier of Jelich by 100%!",
+        "Multi": 1.0,
+        "Cost": 581250000000000.0,
+        "Purchased": false,
+        "OrderInSeries": 5
       }
     ]
   }

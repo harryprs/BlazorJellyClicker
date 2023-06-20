@@ -236,45 +236,30 @@
 					_jellies[5].Cost = cost * 1.15;
 					_jellies[5].Income += (inc * multi);
 					break;
-				case "Jelly Jenerator":
+				case "Jelemental":
 					_jellies[6].Count++;
 					_jellies[6].Cost = cost * 1.15;
 					_jellies[6].Income += (inc * multi);
 					break;
-				case "Jelemental":
+				case "Jellymancer":
 					_jellies[7].Count++;
 					_jellies[7].Cost = cost * 1.15;
 					_jellies[7].Income += (inc * multi);
 					break;
-				case "Jellymancer":
+				case "Mimic Jelly":
 					_jellies[8].Count++;
 					_jellies[8].Cost = cost * 1.15;
 					_jellies[8].Income += (inc * multi);
 					break;
-				case "Jello-o":
+				case "Engorged Gelatinous Cube":
 					_jellies[9].Count++;
 					_jellies[9].Cost = cost * 1.15;
 					_jellies[9].Income += (inc * multi);
 					break;
-				case "Mimic Jelly":
+				case "Jelich":
 					_jellies[10].Count++;
 					_jellies[10].Cost = cost * 1.15;
 					_jellies[10].Income += (inc * multi);
-					break;
-				case "Gelatinous Cube":
-					_jellies[11].Count++;
-					_jellies[11].Cost = cost * 1.15;
-					_jellies[11].Income += (inc * multi);
-					break;
-				case "Engorged Gelatinous Cube":
-					_jellies[12].Count++;
-					_jellies[12].Cost = cost * 1.15;
-					_jellies[12].Income += (inc * multi);
-					break;
-				case "Jelich":
-					_jellies[13].Count++;
-					_jellies[13].Cost = cost * 1.15;
-					_jellies[13].Income += (inc * multi);
 					break;
 				default:
 					break;
@@ -695,7 +680,7 @@
 
 		if (n < 1000000000000000000)
 			return String.Format("{0:#,,,,,.}Quad", n - 500000000000000);
-
+		//This as large as we can format to on a double
 		return String.Format("{0:#,,,,,,.}Quint", n - 5000000000000000);
 	}
 }
