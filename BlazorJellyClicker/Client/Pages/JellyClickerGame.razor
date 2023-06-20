@@ -204,68 +204,15 @@
 	{
 		if (currency >= cost)
 		{
-			switch (name)
+			var jellyToBuy = _jellies.Where(i => i.Name == name).FirstOrDefault();
+			if (jellyToBuy != null)
 			{
-				case "Jelly":
-					_jellies[0].Count++;
-					_jellies[0].Cost = cost * 1.15;
-					_jellies[0].Income += (inc * multi);
-					break;
-				case "Large Jelly":
-					_jellies[1].Count++;
-					_jellies[1].Cost = cost * 1.15;
-					_jellies[1].Income += (inc * multi);
-					break;
-				case "PB&J":
-					_jellies[2].Count++;
-					_jellies[2].Cost = cost * 1.15;
-					_jellies[2].Income += (inc * multi);
-					break;
-				case "Giga Jelly":
-					_jellies[3].Count++;
-					_jellies[3].Cost = cost * 1.15;
-					_jellies[3].Income += (inc * multi);
-					break;
-				case "Jellyfish":
-					_jellies[4].Count++;
-					_jellies[4].Cost = cost * 1.15;
-					_jellies[4].Income += (inc * multi);
-					break;
-				case "Jelfling":
-					_jellies[5].Count++;
-					_jellies[5].Cost = cost * 1.15;
-					_jellies[5].Income += (inc * multi);
-					break;
-				case "Jelemental":
-					_jellies[6].Count++;
-					_jellies[6].Cost = cost * 1.15;
-					_jellies[6].Income += (inc * multi);
-					break;
-				case "Jellymancer":
-					_jellies[7].Count++;
-					_jellies[7].Cost = cost * 1.15;
-					_jellies[7].Income += (inc * multi);
-					break;
-				case "Mimic Jelly":
-					_jellies[8].Count++;
-					_jellies[8].Cost = cost * 1.15;
-					_jellies[8].Income += (inc * multi);
-					break;
-				case "Engorged Gelatinous Cube":
-					_jellies[9].Count++;
-					_jellies[9].Cost = cost * 1.15;
-					_jellies[9].Income += (inc * multi);
-					break;
-				case "Jelich":
-					_jellies[10].Count++;
-					_jellies[10].Cost = cost * 1.15;
-					_jellies[10].Income += (inc * multi);
-					break;
-				default:
-					break;
+				jellyToBuy.Count++;
+				jellyToBuy.Cost = cost * 1.15;
+				jellyToBuy.Income += (inc * multi);
+				currency -= cost;
+				income += (inc * multi);
 			}
-			currency -= cost;
-			income += (inc * multi);
 		}
 	}
 
